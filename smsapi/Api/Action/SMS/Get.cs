@@ -4,7 +4,13 @@ namespace SMSApi.Api.Action
 {
     public class SMSGet : BaseSimple<Response.Status>
     {
-        public SMSGet() : base() { }
+
+        public SMSGet(Client Client,
+                      IProxy  Proxy)
+
+            : base(Client, Proxy)
+
+        { }
 
         protected override string Uri() { return "sms.do"; }
 
@@ -12,16 +18,18 @@ namespace SMSApi.Api.Action
 
         protected override NameValueCollection Values()
         {
-            NameValueCollection collection = new NameValueCollection();
+
+            var collection = new NameValueCollection();
 
             collection.Add("format", "json");
 
-            collection.Add("username", client.GetUsername());
-            collection.Add("password", client.GetPassword());
+            collection.Add("username", Client.Username);
+            collection.Add("password", Client.Password);
 
             collection.Add("status", string.Join("|", id));
 
             return collection;
+
         }
 
         public SMSGet Id(string id)
@@ -35,5 +43,7 @@ namespace SMSApi.Api.Action
             this.id = ids;
             return this;
         }
+
     }
+
 }

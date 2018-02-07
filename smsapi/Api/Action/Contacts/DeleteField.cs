@@ -1,21 +1,24 @@
 using System;
-using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
 {
-	public class DeleteField : Rest<SMSApi.Api.Response.Base>
-	{
-		public DeleteField(string fieldId)
-			: base()
-		{
-			FieldId = fieldId;
-		}
+    public class DeleteField : Rest<Response.Base>
+    {
 
-		protected override string Resource { get { return "contacts/fields/" + FieldId; } }
+        public DeleteField(Client Client,
+                           IProxy  Proxy,
+                           String fieldId)
+            : base(Client, Proxy)
+        {
+            FieldId = fieldId;
+        }
 
-		protected override RequestMethod Method { get { return RequestMethod.DELETE; } }
+        protected override string Resource { get { return "contacts/fields/" + FieldId; } }
 
-		private string fieldId;
-		public string FieldId { get { return fieldId; } private set { fieldId = value; } }
-	}
+        protected override RequestMethod Method { get { return RequestMethod.DELETE; } }
+
+        public string FieldId { get; }
+
+    }
+
 }

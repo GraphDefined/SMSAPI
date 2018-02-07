@@ -1,25 +1,26 @@
 using System;
-using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
 {
-	public class GetGroupPermission : Rest<SMSApi.Api.Response.GroupPermission>
-	{
-		public GetGroupPermission(string groupId, string username)
-			: base()
-		{
-			GroupId = groupId;
-			Username = username;
-		}
+    public class GetGroupPermission : Rest<Response.GroupPermission>
+    {
 
-		protected override string Resource { get { return "contacts/groups/" + GroupId + "/permissions/" + Username; } }
+        public GetGroupPermission(Client Client,
+                                  IProxy  Proxy,
+                                  String groupId,
+                                  String username)
+            : base(Client, Proxy)
+        {
+            GroupId  = groupId;
+            Username = username;
+        }
 
-		protected override RequestMethod Method { get { return RequestMethod.GET; } }
+        protected override string Resource { get { return "contacts/groups/" + GroupId + "/permissions/" + Username; } }
 
-		private string groupId;
-		public string GroupId { get { return groupId; } private set { groupId = value; } }
+        protected override RequestMethod Method { get { return RequestMethod.GET; } }
 
-		private string username;
-		public string Username { get { return username; } private set { username = value; } }
-	}
+        public string GroupId { get; }
+        public string Username { get; }
+
+    }
 }

@@ -2,9 +2,16 @@
 
 namespace SMSApi.Api.Action
 {
-    public class SMSDelete : BaseSimple<SMSApi.Api.Response.Countable>
+
+    public class SMSDelete : BaseSimple<Response.Countable>
     {
-        public SMSDelete() : base() { }
+
+        public SMSDelete(Client Client,
+                         IProxy  Proxy)
+
+            : base(Client, Proxy)
+
+        { }
 
         protected override string Uri() { return "sms.do"; }
 
@@ -12,16 +19,18 @@ namespace SMSApi.Api.Action
 
         protected override NameValueCollection Values()
         {
-            NameValueCollection collection = new NameValueCollection();
+
+            var collection = new NameValueCollection();
 
             collection.Add("format", "json");
 
-            collection.Add("username", client.GetUsername());
-            collection.Add("password", client.GetPassword());
+            collection.Add("username", Client.Username);
+            collection.Add("password", Client.Password);
 
             collection.Add("sch_del", id);
 
             return collection;
+
         }
 
         public SMSDelete Id(string id)
@@ -29,5 +38,7 @@ namespace SMSApi.Api.Action
             this.id = id;
             return this;
         }
+
     }
+
 }

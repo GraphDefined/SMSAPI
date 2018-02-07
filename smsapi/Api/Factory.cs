@@ -3,33 +3,27 @@ namespace SMSApi.Api
 {
     public abstract class Factory
     {
-        protected Client client;
-        protected Proxy proxy;
+
+        protected Client Client { get; }
+        protected IProxy  Proxy  { get; }
 
         public Factory()
         {
-            proxy = new ProxyHTTP("https://api.smsapi.com/api/");
+            this.Proxy  = new ProxyHTTP("https://api.smsapi.com/api/");
         }
 
         public Factory(Client client)
         {
-            Client(client);
-            proxy = new ProxyHTTP("https://api.smsapi.com/api/");
+            this.Client = client;
+            this.Proxy  = new ProxyHTTP("https://api.smsapi.com/api/");
         }
 
-        public Factory(Client client, Proxy proxy) : this(client)
+        public Factory(Client client, IProxy proxy)
         {
-            this.proxy = proxy;
+            this.Client = client;
+            this.Proxy  = proxy;
         }
 
-        public void Client(Client client)
-        {
-            this.client = client;
-        }
-
-        public void Proxy(Proxy proxy)
-        {
-            this.proxy = proxy;
-        }
     }
+
 }

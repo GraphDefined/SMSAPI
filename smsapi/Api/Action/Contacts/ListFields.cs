@@ -3,15 +3,20 @@ using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
 {
-	public class ListFields : Rest<SMSApi.Api.Response.Fields>
-	{
-		public ListFields ()
-			: base()
-		{
-		}
+    public class ListFields : Rest<Response.Fields>
+    {
 
-		protected override string Resource { get { return "contacts/fields"; } }
+        public ListFields(Client Client,
+                          IProxy Proxy)
 
-		protected override RequestMethod Method { get { return RequestMethod.GET; } }
-	}
+            : base(Client, Proxy)
+
+        { }
+
+        protected override string Resource { get { return "contacts/fields"; } }
+
+        protected override RequestMethod Method { get { return RequestMethod.GET; } }
+
+    }
+
 }

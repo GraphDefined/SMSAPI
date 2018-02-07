@@ -6,6 +6,7 @@ namespace SMSApi.Api.Response
     [DataContract]
     public class Status : Countable
     {
+
         private Status() : base() { }
 
         [DataMember(Name = "list", IsRequired = false)]
@@ -24,13 +25,15 @@ namespace SMSApi.Api.Response
             set { }
         }
 
-		[DataMember(Name = "message", IsRequired = false)]
-		public readonly string Message;
+        [DataMember(Name = "message", IsRequired = false)]
+        public readonly string Message;
 
-		[DataMember(Name = "length", IsRequired = false)]
-		public readonly int? Length;
+        [DataMember(Name = "length", IsRequired = false)]
+        public readonly int? Length;
 
-		[DataMember(Name = "parts", IsRequired = false)]
-		public readonly int? Parts;
+        [DataMember(Name = "parts", IsRequired = false)]
+        public readonly int? Parts;
+
     }
+
 }

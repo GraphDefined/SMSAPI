@@ -3,19 +3,24 @@ using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
 {
-	public class DeleteGroup : Rest<SMSApi.Api.Response.Base>
-	{
-		public DeleteGroup(string groupId)
-			: base()
-		{
-			GroupId = groupId;
-		}
 
-		protected override string Resource { get { return "contacts/groups/" + GroupId; } }
+    public class DeleteGroup : Rest<Response.Base>
+    {
 
-		protected override RequestMethod Method { get { return RequestMethod.DELETE; } }
+        public DeleteGroup(Client Client,
+                           IProxy  Proxy,
+                           String groupId)
+            : base(Client, Proxy)
+        {
+            GroupId = groupId;
+        }
 
-		private string groupId;
-		public string GroupId { get { return groupId; } private set { groupId = value; } }
-	}
+        protected override string Resource { get { return "contacts/groups/" + GroupId; } }
+
+        protected override RequestMethod Method { get { return RequestMethod.DELETE; } }
+
+        public string GroupId { get; }
+
+    }
+
 }

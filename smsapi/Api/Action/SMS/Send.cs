@@ -3,36 +3,43 @@ using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
 {
+
     public class SMSSend : Send
     {
-        public SMSSend() : base() { }
+
+        public SMSSend(Client Client,
+                       IProxy  Proxy)
+
+            : base(Client, Proxy)
+
+        { }
 
         protected override string Uri() { return "sms.do"; }
 
         protected override NameValueCollection Values()
         {
-            NameValueCollection collection = new NameValueCollection();
 
-            collection.Add("format", "json");
+            var collection = new NameValueCollection {
+                                 { "format",   "json" },
+                                 { "username", Client.Username },
+                                 { "password", Client.Password }
+                             };
 
-            collection.Add("username", client.GetUsername());
-            collection.Add("password", client.GetPassword());
-
-            if (Sender != null) 
+            if (Sender != null)
                 collection.Add("from", Sender);
 
             if (To != null)
-                collection.Add("to", string.Join(",", To));
+                collection.Add("to", String.Join(",", To));
 
             if (Group != null)
                 collection.Add("group", Group);
 
             collection.Add("message", Text);
 
-            collection.Add("single", (Single ? "1" : "0") );
+            collection.Add("single",    (Single    ? "1" : "0") );
             collection.Add("nounicode", (NoUnicode ? "1" : "0") );
-            collection.Add("flash", (Flash ? "1" : "0") );
-            collection.Add("fast", (Fast ? "1" : "0") );
+            collection.Add("flash",     (Flash     ? "1" : "0") );
+            collection.Add("fast",      (Fast      ? "1" : "0") );
 
             if (DataCoding != null)
                 collection.Add("datacoding", DataCoding);
@@ -51,8 +58,8 @@ namespace SMSApi.Api.Action
 
             collection.Add("encoding", Encoding);
 
-			if (Normalize == true)
-				collection.Add("normalize", "1");
+            if (Normalize == true)
+                collection.Add("normalize", "1");
 
             if (Test == true)
                 collection.Add("test", "1");
@@ -84,15 +91,13 @@ namespace SMSApi.Api.Action
 
         protected override void Validate()
         {
+
             if( To != null && Group != null )
-            {
                 throw new ArgumentException("Cannot use 'to' and 'group' at the same time!");
-            }
 
             if (Text == null)
-            {
                 throw new ArgumentException("Cannot send message without text!");
-            }
+
         }
 
         private string Text;
@@ -105,7 +110,7 @@ namespace SMSApi.Api.Action
         private bool Flash = false;
         private string Encoding = "UTF-8";
         private bool Fast = false;
-		private bool Normalize = false;
+        private bool Normalize = false;
         private int MaxParts = 0;
         private string[] Params = null;
         private bool Details = true;
@@ -260,10 +265,12 @@ namespace SMSApi.Api.Action
             return this;
         }
 
-		public SMSSend SetNormalize(bool flag = true)
-		{
-			this.Normalize = flag;
-			return this;
-		}
+        public SMSSend SetNormalize(bool flag = true)
+        {
+            this.Normalize = flag;
+            return this;
+        }
+
     }
+
 }

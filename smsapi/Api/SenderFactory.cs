@@ -1,60 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SMSApi.Api
 {
     public class SenderFactory : Factory
     {
-        public SenderFactory() : base() { }
-        public SenderFactory(Client client) : base(client) { }
-        public SenderFactory(Client client, Proxy proxy) : base(client, proxy) { }
 
-        public SMSApi.Api.Action.SenderAdd ActionAdd(string name = null)
+        public SenderFactory()
+            : base()
+        { }
+
+        public SenderFactory(Client client)
+            : base(client)
+        { }
+
+        public SenderFactory(Client client, IProxy proxy)
+            : base(client, proxy)
+        { }
+
+        public Action.SenderAdd ActionAdd(String name = null)
         {
-            var action = new SMSApi.Api.Action.SenderAdd();
-
-            action.Client(client);
-            action.Proxy(proxy);
-
+            var action = new Action.SenderAdd(Client, Proxy);
             action.SetName(name);
 
             return action;
         }
 
-        public SMSApi.Api.Action.SenderDelete ActionDelete(string name = null)
+        public Action.SenderDelete ActionDelete(String name = null)
         {
-            var action = new SMSApi.Api.Action.SenderDelete();
-
-            action.Client(client);
-            action.Proxy(proxy);
-
+            var action = new Action.SenderDelete(Client, Proxy);
             action.Name(name);
 
             return action;
         }
 
-        public SMSApi.Api.Action.SenderSetDefault ActionSetDefault(string name = null)
+        public Action.SenderSetDefault ActionSetDefault(String name = null)
         {
-            var action = new SMSApi.Api.Action.SenderSetDefault();
-
-            action.Client(client);
-            action.Proxy(proxy);
-
+            var action = new Action.SenderSetDefault(Client, Proxy);
             action.Name(name);
 
             return action;
         }
 
-        public SMSApi.Api.Action.SenderList ActionList()
-        {
-            var action = new SMSApi.Api.Action.SenderList();
+        public Action.SenderList ActionList()
+            => new Action.SenderList(Client, Proxy);
 
-            action.Client(client);
-            action.Proxy(proxy);
-
-            return action;
-        }
     }
+
 }

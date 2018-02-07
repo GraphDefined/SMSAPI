@@ -1,25 +1,28 @@
 using System;
-using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
 {
-	public class BindContactToGroup : Rest<SMSApi.Api.Response.Base>
-	{
-		public BindContactToGroup(string contactId, string groupId)
-			: base()
-		{
-			ContactId = contactId;
-			GroupId = groupId;
-		}
 
-		protected override string Resource { get { return "contacts/" + contactId + "/groups/" + groupId; } }
+    public class BindContactToGroup : Rest<Response.Base>
+    {
 
-		protected override RequestMethod Method { get { return RequestMethod.PUT; } }
+        public BindContactToGroup(Client Client,
+                                  IProxy  Proxy,
+                                  String contactId,
+                                  String groupId)
+            : base(Client, Proxy)
+        {
+            ContactId = contactId;
+            GroupId   = groupId;
+        }
 
-		private string contactId;
-		public string ContactId { get { return contactId; } private set { contactId = value; } }
+        protected override string Resource { get { return "contacts/" + ContactId + "/groups/" + GroupId; } }
 
-		private string groupId;
-		public string GroupId { get { return groupId; } private set { groupId = value; } }
-	}
+        protected override RequestMethod Method { get { return RequestMethod.PUT; } }
+
+        public string ContactId { get; }
+        public string GroupId   { get; }
+
+    }
+
 }

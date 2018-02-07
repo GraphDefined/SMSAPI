@@ -14,10 +14,12 @@
  */
 namespace SMSApi.Api.Action
 {
-    public class UserEdit : BaseSimple<SMSApi.Api.Response.User>
+    public class UserEdit : BaseSimple<Response.User>
     {
-        public UserEdit()
-            : base() 
+
+        public UserEdit(Client Client,
+                        IProxy Proxy)
+            : base(Client, Proxy)
         {
             limit = -1;
             monthLimit = -1;
@@ -47,12 +49,12 @@ namespace SMSApi.Api.Action
 
         protected override NameValueCollection Values()
         {
-            NameValueCollection collection = new NameValueCollection();
+            var collection = new NameValueCollection();
 
             collection.Add("format", "json");
 
-            collection.Add("username", client.GetUsername());
-            collection.Add("password", client.GetPassword());
+            collection.Add("username", Client.Username);
+            collection.Add("password", Client.Password);
 
             collection.Add("set_user", username);
             if (password != null) collection.Add("pass", password);

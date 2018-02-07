@@ -1,26 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SMSApi.Api
 {
     public class HLRFactory : Factory
     {
-        public HLRFactory() : base() { }
-        public HLRFactory(Client client) : base(client) { }
+        public HLRFactory()
+            : base()
+        { }
 
-        public HLRFactory(Client client, Proxy proxy) : base(client, proxy)
+        public HLRFactory(Client client)
+            : base(client)
+        { }
+
+        public HLRFactory(Client client, IProxy proxy)
+            : base(client, proxy)
+        { }
+
+        public Action.HLRCheckNumber ActionCheckNumber(String number = null)
         {
-        }
-
-        public SMSApi.Api.Action.HLRCheckNumber ActionCheckNumber(string number = null)
-        {
-            var action = new SMSApi.Api.Action.HLRCheckNumber();
-
-            action.Client(client);
-            action.Proxy(proxy);
-
+            var action = new Action.HLRCheckNumber(Client, Proxy);
             action.SetNumber(number);
 
             return action;

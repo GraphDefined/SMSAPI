@@ -2,9 +2,16 @@
 
 namespace SMSApi.Api.Action
 {
-    public class HLRCheckNumber : BaseSimple<SMSApi.Api.Response.CheckNumber>
+
+    public class HLRCheckNumber : BaseSimple<Response.CheckNumber>
     {
-        public HLRCheckNumber() : base() { }
+
+        public HLRCheckNumber(Client Client,
+                              IProxy  Proxy)
+
+            : base(Client, Proxy)
+
+        { }
 
         protected override string Uri() { return "hlrsync.do"; }
 
@@ -26,12 +33,12 @@ namespace SMSApi.Api.Action
 
         protected override NameValueCollection Values()
         {
-            NameValueCollection collection = new NameValueCollection();
+            var collection = new NameValueCollection();
 
             collection.Add("format", "json");
 
-            collection.Add("username", client.GetUsername());
-            collection.Add("password", client.GetPassword());
+            collection.Add("username", Client.Username);
+            collection.Add("password", Client.Password);
 
             collection.Add("number", string.Join(",", numbers));
 

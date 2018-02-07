@@ -3,18 +3,24 @@ using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
 {
-    public class SenderList : BaseArray<SMSApi.Api.Response.Sender>
+    public class SenderList : BaseArray<Response.Sender>
     {
+
+        public SenderList(Client Client,
+                          IProxy  Proxy)
+            : base(Client, Proxy)
+        { }
+
         protected override string Uri() { return "sender.do"; }
 
         protected override NameValueCollection Values()
         {
-            NameValueCollection collection = new NameValueCollection();
+            var collection = new NameValueCollection();
 
             collection.Add("format", "json");
 
-            collection.Add("username", client.GetUsername());
-            collection.Add("password", client.GetPassword());
+            collection.Add("username", Client.Username);
+            collection.Add("password", Client.Password);
 
             collection.Add("list", "1");
 

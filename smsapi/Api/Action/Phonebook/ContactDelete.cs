@@ -2,9 +2,15 @@
 
 namespace SMSApi.Api.Action
 {
-    public class PhonebookContactDelete : BaseSimple<SMSApi.Api.Response.Base>
+    public class PhonebookContactDelete : BaseSimple<Response.Base>
     {
-        public PhonebookContactDelete() : base() { }
+
+        public PhonebookContactDelete(Client Client,
+                                      IProxy Proxy)
+
+            : base(Client, Proxy)
+
+        { }
 
         protected override string Uri() { return "phonebook.do"; }
 
@@ -12,12 +18,12 @@ namespace SMSApi.Api.Action
 
         protected override NameValueCollection Values()
         {
-            NameValueCollection collection = new NameValueCollection();
+            var collection = new NameValueCollection();
 
             collection.Add("format", "json");
 
-            collection.Add("username", client.GetUsername());
-            collection.Add("password", client.GetPassword());
+            collection.Add("username", Client.Username);
+            collection.Add("password", Client.Password);
 
             collection.Add("delete_contact", number);
 
@@ -29,5 +35,6 @@ namespace SMSApi.Api.Action
             this.number = number;
             return this;
         }
+
     }
 }

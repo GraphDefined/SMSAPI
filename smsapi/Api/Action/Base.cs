@@ -3,52 +3,60 @@ using System.Runtime.Serialization.Json;
 using System.Collections.Specialized;
 using System.Collections.Generic;
 using System;
+using System.Text;
 
 namespace SMSApi.Api.Action
 {
-    public abstract class Base<T,TResult>
+
+    public abstract class Base<T, TResult>
     {
-        protected Client client;
-        protected Proxy proxy;
 
-        abstract protected string Uri();
+        protected Client Client  { get; }
+        protected IProxy Proxy   { get; }
 
-		protected virtual RequestMethod Method { get { return RequestMethod.POST; } }
-
-        public void Client(Client client)
+        public Base(Client Client,
+                    IProxy  Proxy)
         {
-            this.client = client;
+            this.Client = Client;
+            this.Proxy  = Proxy;
         }
 
-        public void Proxy(Proxy proxy)
-        {
-            this.proxy = proxy;
-        }
+
+
+        abstract protected String              Uri();
+        abstract protected NameValueCollection Values();
+
+
+        protected virtual RequestMethod Method => RequestMethod.POST;
 
         protected TT ResponseToObject<TT>(Stream data)
         {
-			TT result;
-			if (data.Length > 0)
-			{
-				data.Position = 0;
-				var serializer = new DataContractJsonSerializer(typeof(TT));
-				result = (TT)serializer.ReadObject(data);
-				data.Position = 0;
-			}
-			else
-			{
-				result = Activator.CreateInstance<TT>();
-			}
+
+            TT result;
+
+            var uu = (data as MemoryStream).ToArray();
+            var aa = Encoding.UTF8.GetString(uu, 0, uu.Length);
+
+
+            if (data.Length > 0)
+            {
+                data.Position = 0;
+                var serializer = new DataContractJsonSerializer(typeof(TT));
+                result = (TT) serializer.ReadObject(data);
+                data.Position = 0;
+            }
+
+            else
+                result = Activator.CreateInstance<TT>();
+
             return result;
+
         }
 
-        abstract protected NameValueCollection Values();
         protected virtual void Validate() { }
 
-        protected virtual Dictionary<string, Stream> Files()
-        {
-            return null;
-        }
+        protected virtual Dictionary<String, Stream> Files()
+            => null;
 
         protected abstract TResult ConvertResponse(T response);
 
@@ -59,11 +67,12 @@ namespace SMSApi.Api.Action
 
         public TResult Execute()
         {
+
             Validate();
 
-            Stream data = proxy.Execute(Uri(), Values(), Files(), Method);
+            Stream data = Proxy.Execute(Uri(), Values(), Files(), Method);
 
-            TResult result = default(TResult);
+            var result = default(TResult);
 
             HandleError(data);
 
@@ -81,6 +90,7 @@ namespace SMSApi.Api.Action
             data.Close();
 
             return result;
+
         }
 
         protected void HandleError(Stream data) {
@@ -123,11 +133,11 @@ namespace SMSApi.Api.Action
          */
         private bool isClientError(int code)
         {
-            if (code == 101) return true;
-            if (code == 102) return true;
-            if (code == 103) return true;
-            if (code == 105) return true;
-            if (code == 110) return true;
+            if (code ==  101) return true;
+            if (code ==  102) return true;
+            if (code ==  103) return true;
+            if (code ==  105) return true;
+            if (code ==  110) return true;
             if (code == 1000) return true;
             if (code == 1001) return true;
 
@@ -142,12 +152,14 @@ namespace SMSApi.Api.Action
          */
         private bool isHostError(int code)
         {
-            if (code == 8) return true;
+            if (code ==   8) return true;
             if (code == 201) return true;
             if (code == 666) return true;
             if (code == 999) return true;
 
             return false;
         }
+
     }
+
 }

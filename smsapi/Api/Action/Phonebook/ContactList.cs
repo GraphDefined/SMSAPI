@@ -2,13 +2,17 @@
 
 namespace SMSApi.Api.Action
 {
-    public class PhonebookContactList : BaseSimple<SMSApi.Api.Response.Contacts>
+    public class PhonebookContactList : BaseSimple<Response.Contacts>
     {
-        public PhonebookContactList() 
-            : base() 
+
+        public PhonebookContactList(Client Client,
+                                    IProxy  Proxy)
+
+            : base(Client, Proxy)
+
         {
             offset = 0;
-            limit = 0;
+            limit  = 0;
         }
 
         protected override string Uri() { return "phonebook.do"; }
@@ -24,12 +28,12 @@ namespace SMSApi.Api.Action
 
         protected override NameValueCollection Values()
         {
-            NameValueCollection collection = new NameValueCollection();
+            var collection = new NameValueCollection();
 
             collection.Add("format", "json");
 
-            collection.Add("username", client.GetUsername());
-            collection.Add("password", client.GetPassword());
+            collection.Add("username", Client.Username);
+            collection.Add("password", Client.Password);
 
             collection.Add("list_contacts", "");
 
