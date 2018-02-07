@@ -10,9 +10,8 @@ namespace SMSApi.Api
     public class HTTPClient
     {
 
-        public String BaseUrl { get; }
-
-        Credentials basicAuthentication;
+        public String      BaseUrl               { get; }
+        public Credentials BasicAuthentication   { get; set; }
 
         public HTTPClient(String baseUrl) 
         {
@@ -113,10 +112,10 @@ namespace SMSApi.Api
             var boundary = "SMSAPI-" + DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss") + (new Random()).Next(int.MinValue, int.MaxValue).ToString() + "-boundary";
 
             var webRequest = WebRequest.Create(BaseUrl + uri);
-            webRequest.Method = RequestMethodToString(method);
+            webRequest.Method = method.RequestMethodToString();
 
-            if (basicAuthentication != null)
-                webRequest.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(basicAuthentication.Username + ":" + basicAuthentication.Password)));
+            if (BasicAuthentication != null)
+                webRequest.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(BasicAuthentication.Username + ":" + BasicAuthentication.Password)));
 
             if (RequestMethods.POST.Equals(method) || RequestMethods.PUT.Equals(method))
             {
@@ -145,7 +144,7 @@ namespace SMSApi.Api
                 }
                 catch (WebException e)
                 {
-                    throw new ProxyException(e.Message, e);
+                    throw new HTTPClientException(e.Message, e);
                 }
 
             }
@@ -158,7 +157,7 @@ namespace SMSApi.Api
             }
             catch (WebException e)
             {
-                throw new ProxyException("Failed to get response from " + webRequest.RequestUri.ToString(), e);
+                throw new HTTPClientException("Failed to get response from " + webRequest.RequestUri.ToString(), e);
             }
 
             response.Position = 0;
@@ -175,28 +174,6 @@ namespace SMSApi.Api
             while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
                 output.Write(buffer, 0, read);
 
-        }
-
-        public void BasicAuthentication(Credentials client)
-        {
-            basicAuthentication = client;
-        }
-
-        public static string RequestMethodToString(RequestMethods method)
-        {
-            switch(method)
-            {
-                case RequestMethods.GET:
-                    return "GET";
-                case RequestMethods.PUT:
-                    return "PUT";
-                case RequestMethods.POST:
-                    return "POST";
-                case RequestMethods.DELETE:
-                    return "DELETE";
-                default:
-                    throw new ProxyException("Invalid request method");
-            }
         }
 
     }

@@ -24,8 +24,8 @@ namespace SMSApi.Api.Action
 
             collection.Add("format", "json");
 
-            collection.Add("username", Client.Username);
-            collection.Add("password", Client.Password);
+            collection.Add("username", Credentials.Username);
+            collection.Add("password", Credentials.Password);
 
             collection.Add("edit_group", oldName);
             collection.Add("name", newName);

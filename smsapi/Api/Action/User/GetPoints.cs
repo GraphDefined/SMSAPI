@@ -17,8 +17,8 @@ namespace SMSApi.Api.Action
             var collection = new NameValueCollection
             {
                 { "format", "json" },
-                { "username", Client.Username },
-                { "password", Client.Password },
+                { "username", Credentials.Username },
+                { "password", Credentials.Password },
                 { "credits", "1" },
                 { "details", "1" }
             };

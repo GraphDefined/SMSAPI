@@ -16,8 +16,8 @@ namespace SMSApi.Api.Action
         protected override NameValueCollection Values()
             => new NameValueCollection {
                    { "format",   "json" },
-                   { "username", Client.Username },
-                   { "password", Client.Password },
+                   { "username", Credentials.Username },
+                   { "password", Credentials.Password },
                    { "list",     "1" }
                };
 

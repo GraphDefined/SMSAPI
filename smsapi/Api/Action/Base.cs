@@ -11,21 +11,21 @@ namespace SMSApi.Api.Action
     public abstract class Base<T, TResult>
     {
 
-        protected Credentials Client  { get; }
-        protected HTTPClient Proxy   { get; }
+        protected Credentials Credentials   { get; }
+        protected HTTPClient  HTTPClient    { get; }
 
-        public Base(Credentials Client,
-                    HTTPClient  Proxy)
+        public Base(Credentials Credentials,
+                    HTTPClient  HTTPClient)
         {
-            this.Client = Client;
-            this.Proxy  = Proxy;
-        }
 
+            this.Credentials = Credentials;
+            this.HTTPClient  = HTTPClient;
+
+        }
 
 
         abstract protected String              Uri();
         abstract protected NameValueCollection Values();
-
 
         protected virtual RequestMethods Method => RequestMethods.POST;
 
@@ -70,7 +70,7 @@ namespace SMSApi.Api.Action
 
             Validate();
 
-            Stream data = Proxy.Execute(Uri(), Values(), Files(), Method);
+            Stream data = HTTPClient.Execute(Uri(), Values(), Files(), Method);
 
             var result = default(TResult);
 

@@ -9,12 +9,12 @@ namespace SMSApi.Api.Action
     public class SMSSend : Send
     {
 
-        public SMSSend(Credentials          Client,
-                       HTTPClient           Proxy,
+        public SMSSend(Credentials          Credentials,
+                       HTTPClient           HTTPClient,
                        IEnumerable<String>  to,
                        String               text)
 
-            : base(Client, Proxy)
+            : base(Credentials, HTTPClient)
 
         {
             this.To    = to;
@@ -28,8 +28,8 @@ namespace SMSApi.Api.Action
 
             var collection = new NameValueCollection {
                                  { "format",   "json" },
-                                 { "username", Client.Username },
-                                 { "password", Client.Password }
+                                 { "username", Credentials.Username },
+                                 { "password", Credentials.Password }
                              };
 
             if (Sender != null)

@@ -9,13 +9,13 @@ namespace SMSApi.Api
         public ContactsFactory(Credentials client)
             : base(client, new HTTPClient("http://api.smsapi.pl/"))
         {
-            HTTPClient.BasicAuthentication(client);
+            HTTPClient.BasicAuthentication = client;
         }
 
         public ContactsFactory(Credentials client, HTTPClient proxy)
             : base(client, proxy)
         {
-            proxy.BasicAuthentication(client);
+            proxy.BasicAuthentication = client;
         }
 
 
