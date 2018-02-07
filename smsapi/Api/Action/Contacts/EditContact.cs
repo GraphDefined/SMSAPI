@@ -6,8 +6,8 @@ namespace SMSApi.Api.Action
     public class EditContact : Rest<Response.Contact>
     {
 
-        public EditContact(Client Client,
-                           IProxy  Proxy,
+        public EditContact(Credentials Client,
+                           HTTPClient  Proxy,
                            String contactId)
 
             : base(Client, Proxy)
@@ -18,7 +18,7 @@ namespace SMSApi.Api.Action
 
         protected override string Resource { get { return "contacts/" + ContactId; } }
 
-        protected override RequestMethod Method { get { return RequestMethod.PUT; } }
+        protected override RequestMethods Method { get { return RequestMethods.PUT; } }
 
         protected override NameValueCollection Parameters
         {

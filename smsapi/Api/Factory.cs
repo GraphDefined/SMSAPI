@@ -4,24 +4,24 @@ namespace SMSApi.Api
     public abstract class Factory
     {
 
-        protected Client Client { get; }
-        protected IProxy  Proxy  { get; }
+        protected Credentials Credentials   { get; }
+        protected HTTPClient  HTTPClient    { get; }
 
         public Factory()
         {
-            this.Proxy  = new ProxyHTTP("https://api.smsapi.com/api/");
+            this.HTTPClient   = new HTTPClient("https://api.smsapi.com/api/");
         }
 
-        public Factory(Client client)
+        public Factory(Credentials credentials)
         {
-            this.Client = client;
-            this.Proxy  = new ProxyHTTP("https://api.smsapi.com/api/");
+            this.Credentials  = credentials;
+            this.HTTPClient   = new HTTPClient("https://api.smsapi.com/api/");
         }
 
-        public Factory(Client client, IProxy proxy)
+        public Factory(Credentials credentials, HTTPClient proxy)
         {
-            this.Client = client;
-            this.Proxy  = proxy;
+            this.Credentials  = credentials;
+            this.HTTPClient   = proxy;
         }
 
     }

@@ -6,8 +6,8 @@ namespace SMSApi.Api.Action
     public abstract class BaseArray<T> : Base<List<T>, Response.Array<T>>
     {
 
-        public BaseArray(Client Client,
-                         IProxy  Proxy)
+        public BaseArray(Credentials Client,
+                         HTTPClient  Proxy)
 
             : base(Client, Proxy)
 

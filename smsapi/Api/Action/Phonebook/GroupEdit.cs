@@ -5,8 +5,8 @@ namespace SMSApi.Api.Action
     public class PhonebookGroupEdit : BaseSimple<Response.Group>
     {
 
-        public PhonebookGroupEdit(Client Client,
-                                  IProxy  Proxy)
+        public PhonebookGroupEdit(Credentials Client,
+                                  HTTPClient  Proxy)
 
             : base(Client, Proxy)
 

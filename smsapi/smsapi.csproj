@@ -95,13 +95,13 @@
     <Compile Include="Api\Response\Senders.cs" />
     <Compile Include="Api\Response\NumberStatus.cs" />
     <Compile Include="Api\SenderFactory.cs" />
-    <Compile Include="Client.cs" />
+    <Compile Include="Credentials.cs" />
     <Compile Include="Api\Factory.cs" />
     <Compile Include="ActionException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IProxy.cs" />
+    <Compile Include="RequestMethods.cs" />
     <Compile Include="ProxyException.cs" />
-    <Compile Include="ProxyHTTP.cs" />
+    <Compile Include="HTTPClient.cs" />
     <Compile Include="Api\Response\Base.cs" />
     <Compile Include="Api\Response\MessageStatus.cs" />
     <Compile Include="Api\Response\Status.cs" />

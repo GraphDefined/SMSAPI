@@ -2,6 +2,7 @@
 
 namespace SMSApi.Api
 {
+
     public class UserFactory : Factory
     {
 
@@ -9,39 +10,29 @@ namespace SMSApi.Api
             : base()
         { }
 
-        public UserFactory(Client client)
-            : base(client)
+        public UserFactory(Credentials Credentials)
+            : base(Credentials)
         { }
 
-        public UserFactory(Client client, IProxy proxy)
-            : base(client, proxy)
+        public UserFactory(Credentials Credentials, HTTPClient proxy)
+            : base(Credentials, proxy)
         { }
 
 
         public Action.UserGetCredits ActionGetCredits()
-            => new Action.UserGetCredits(Client, Proxy);
+            => new Action.UserGetCredits(Credentials, HTTPClient);
 
-        public Action.UserAdd ActionAdd()
-            => new Action.UserAdd(Client, Proxy);
+        public Action.UserAdd  ActionAdd (String Username)
+            => new Action.UserAdd (Credentials, HTTPClient, Username);
 
-        public Action.UserEdit ActionEdit(String username = null)
-        {
-            var action = new Action.UserEdit(Client, Proxy);
-            action.Username(username);
+        public Action.UserEdit ActionEdit(String Username)
+            => new Action.UserEdit(Credentials, HTTPClient, Username);
 
-            return action;
-        }
+        public Action.UserGet  ActionGet (String Username)
+            => new Action.UserGet (Credentials, HTTPClient, Username);
 
-        public Action.UserGet ActionGet(String username = null)
-        {
-            var action = new Action.UserGet(Client, Proxy);
-            action.Username(username);
-
-            return action;
-        }
-
-        public Action.UserList ActionList()
-            => new Action.UserList(Client, Proxy);
+        public Action.UserList ActionList(String Username = null)
+            => new Action.UserList(Credentials, HTTPClient, Username);
 
     }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
@@ -6,25 +6,21 @@ namespace SMSApi.Api.Action
     public class SenderList : BaseArray<Response.Sender>
     {
 
-        public SenderList(Client Client,
-                          IProxy  Proxy)
+        public SenderList(Credentials  Client,
+                          HTTPClient Proxy)
             : base(Client, Proxy)
         { }
 
-        protected override string Uri() { return "sender.do"; }
+        protected override String Uri() { return "sender.do"; }
 
         protected override NameValueCollection Values()
-        {
-            var collection = new NameValueCollection();
+            => new NameValueCollection {
+                   { "format",   "json" },
+                   { "username", Client.Username },
+                   { "password", Client.Password },
+                   { "list",     "1" }
+               };
 
-            collection.Add("format", "json");
-
-            collection.Add("username", Client.Username);
-            collection.Add("password", Client.Password);
-
-            collection.Add("list", "1");
-
-            return collection;
-        }
     }
+
 }

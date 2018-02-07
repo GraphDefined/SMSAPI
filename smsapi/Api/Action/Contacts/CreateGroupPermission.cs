@@ -6,8 +6,8 @@ namespace SMSApi.Api.Action
     public class CreateGroupPermission : Rest<Response.GroupPermission>
     {
 
-        public CreateGroupPermission(Client Client,
-                                     IProxy  Proxy,
+        public CreateGroupPermission(Credentials Client,
+                                     HTTPClient  Proxy,
                                      String groupId)
             : base(Client, Proxy)
         {
@@ -16,7 +16,7 @@ namespace SMSApi.Api.Action
 
         protected override string Resource { get { return "contacts/groups/" + GroupId + "/permissions"; } }
 
-        protected override RequestMethod Method { get { return RequestMethod.POST; } }
+        protected override RequestMethods Method { get { return RequestMethods.POST; } }
 
         protected override NameValueCollection Parameters
         {

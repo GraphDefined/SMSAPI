@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
 {
@@ -6,38 +7,28 @@ namespace SMSApi.Api.Action
     public class SMSDelete : BaseSimple<Response.Countable>
     {
 
-        public SMSDelete(Client Client,
-                         IProxy  Proxy)
+        public SMSDelete(Credentials  Client,
+                         HTTPClient  Proxy,
+                         String  Id)
 
             : base(Client, Proxy)
 
-        { }
+        {
+            this.Id = Id;
+        }
 
-        protected override string Uri() { return "sms.do"; }
+        protected override String Uri() { return "sms.do"; }
 
-        protected string id;
+        protected String Id { get; }
 
         protected override NameValueCollection Values()
-        {
+            => new NameValueCollection {
+                   { "format",    "json" },
+                   { "username",  Client.Username },
+                   { "password",  Client.Password },
+                   { "sch_del",   Id }
+               };
 
-            var collection = new NameValueCollection();
-
-            collection.Add("format", "json");
-
-            collection.Add("username", Client.Username);
-            collection.Add("password", Client.Password);
-
-            collection.Add("sch_del", id);
-
-            return collection;
-
-        }
-
-        public SMSDelete Id(string id)
-        {
-            this.id = id;
-            return this;
-        }
 
     }
 

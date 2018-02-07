@@ -5,8 +5,8 @@ namespace SMSApi.Api.Action
     public class DeleteContact : Rest<Response.Base>
     {
 
-        public DeleteContact(Client  Client,
-                             IProxy   Proxy,
+        public DeleteContact(Credentials  Client,
+                             HTTPClient   Proxy,
                              String  contactId)
             : base(Client, Proxy)
         {
@@ -15,7 +15,7 @@ namespace SMSApi.Api.Action
 
         protected override string Resource { get { return "contacts/" + ContactId; } }
 
-        protected override RequestMethod Method { get { return RequestMethod.DELETE; } }
+        protected override RequestMethods Method { get { return RequestMethods.DELETE; } }
 
         public String ContactId { get; }
 

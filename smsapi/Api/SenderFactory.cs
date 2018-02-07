@@ -2,6 +2,7 @@
 
 namespace SMSApi.Api
 {
+
     public class SenderFactory : Factory
     {
 
@@ -9,40 +10,26 @@ namespace SMSApi.Api
             : base()
         { }
 
-        public SenderFactory(Client client)
-            : base(client)
+        public SenderFactory(Credentials Credentials)
+            : base(Credentials)
         { }
 
-        public SenderFactory(Client client, IProxy proxy)
-            : base(client, proxy)
+        public SenderFactory(Credentials Credentials, HTTPClient proxy)
+            : base(Credentials, proxy)
         { }
 
-        public Action.SenderAdd ActionAdd(String name = null)
-        {
-            var action = new Action.SenderAdd(Client, Proxy);
-            action.SetName(name);
 
-            return action;
-        }
+        public Action.SenderAdd ActionAdd(String Name)
+            => new Action.SenderAdd(Credentials, HTTPClient, Name);
 
-        public Action.SenderDelete ActionDelete(String name = null)
-        {
-            var action = new Action.SenderDelete(Client, Proxy);
-            action.Name(name);
+        public Action.SenderDelete ActionDelete(String Name)
+            => new Action.SenderDelete(Credentials, HTTPClient, Name);
 
-            return action;
-        }
-
-        public Action.SenderSetDefault ActionSetDefault(String name = null)
-        {
-            var action = new Action.SenderSetDefault(Client, Proxy);
-            action.Name(name);
-
-            return action;
-        }
+        public Action.SenderSetDefault ActionSetDefault(String DefaultName)
+            => new Action.SenderSetDefault(Credentials, HTTPClient, DefaultName);
 
         public Action.SenderList ActionList()
-            => new Action.SenderList(Client, Proxy);
+            => new Action.SenderList(Credentials, HTTPClient);
 
     }
 

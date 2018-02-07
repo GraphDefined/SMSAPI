@@ -5,22 +5,22 @@ using System.Security.Cryptography;
 namespace SMSApi.Api
 {
 
-    public class Client
+    public class Credentials
     {
 
         public String Username { get; }
         public String Password { get; }
 
 
-        private Client(String Username,
-                      String Password)
+        private Credentials(String Username,
+                            String Password)
         {
             this.Username  = Username;
             this.Password  = Password;
         }
 
-        public static Client Create(String Username,
-                                    String Password)
+        public static Credentials Create(String Username,
+                                         String Password)
         {
 
             var hash     = new StringBuilder();
@@ -30,15 +30,15 @@ namespace SMSApi.Api
             for (int i = 0; i < hashbin.Length; i++)
                 hash.Append(hashbin[i].ToString("x2"));
 
-            return new Client(Username,
-                              hash.ToString());
+            return new Credentials(Username,
+                                 hash.ToString());
 
         }
 
-        public static Client CreateMD5(String Username,
-                                       String Password)
-            => new Client(Username,
-                          Password);
+        public static Credentials CreateMD5(String Username,
+                                            String Password)
+            => new Credentials(Username,
+                               Password);
 
     }
 

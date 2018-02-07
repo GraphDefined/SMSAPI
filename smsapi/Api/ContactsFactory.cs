@@ -6,13 +6,13 @@ namespace SMSApi.Api
     public class ContactsFactory : Factory
     {
 
-        public ContactsFactory(Client client)
-            : base(client, new ProxyHTTP("http://api.smsapi.pl/"))
+        public ContactsFactory(Credentials client)
+            : base(client, new HTTPClient("http://api.smsapi.pl/"))
         {
-            Proxy.BasicAuthentication(client);
+            HTTPClient.BasicAuthentication(client);
         }
 
-        public ContactsFactory(Client client, IProxy proxy)
+        public ContactsFactory(Credentials client, HTTPClient proxy)
             : base(client, proxy)
         {
             proxy.BasicAuthentication(client);
@@ -20,76 +20,76 @@ namespace SMSApi.Api
 
 
         public Action.ListContacts ListContacts()
-            => new Action.ListContacts(Client, Proxy);
+            => new Action.ListContacts(Credentials, HTTPClient);
 
         public Action.CreateContact CreateContact()
-            => new Action.CreateContact(Client, Proxy);
+            => new Action.CreateContact(Credentials, HTTPClient);
 
-        public Action.DeleteContact DeleteContact(string contactId)
-            => new Action.DeleteContact(Client, Proxy, contactId);
+        public Action.DeleteContact DeleteContact(String contactId)
+            => new Action.DeleteContact(Credentials, HTTPClient, contactId);
 
-        public Action.GetContact GetContact(string contactId)
-            => new Action.GetContact(Client, Proxy, contactId);
+        public Action.GetContact GetContact(String contactId)
+            => new Action.GetContact(Credentials, HTTPClient, contactId);
 
-        public Action.EditContact EditContact(string contactId)
-            => new Action.EditContact(Client, Proxy, contactId);
+        public Action.EditContact EditContact(String contactId)
+            => new Action.EditContact(Credentials, HTTPClient, contactId);
 
         public Action.ListGroups ListGroups()
-            => new Action.ListGroups(Client, Proxy);
+            => new Action.ListGroups(Credentials, HTTPClient);
 
         public Action.CreateGroup CreateGroup()
-            => new Action.CreateGroup(Client, Proxy);
+            => new Action.CreateGroup(Credentials, HTTPClient);
 
-        public Action.DeleteGroup DeleteGroup(string groupId)
-            => new Action.DeleteGroup(Client, Proxy, groupId);
+        public Action.DeleteGroup DeleteGroup(String groupId)
+            => new Action.DeleteGroup(Credentials, HTTPClient, groupId);
 
-        public Action.GetGroup GetGroup(string groupId)
-            => new Action.GetGroup(Client, Proxy, groupId);
+        public Action.GetGroup GetGroup(String groupId)
+            => new Action.GetGroup(Credentials, HTTPClient, groupId);
 
-        public Action.EditGroup EditGroup(string groupId)
-            => new Action.EditGroup(Client, Proxy, groupId);
+        public Action.EditGroup EditGroup(String groupId)
+            => new Action.EditGroup(Credentials, HTTPClient, groupId);
 
-        public Action.ListGroupPermissions ListGroupPermissions(string groupId)
-            => new Action.ListGroupPermissions(Client, Proxy, groupId);
+        public Action.ListGroupPermissions ListGroupPermissions(String groupId)
+            => new Action.ListGroupPermissions(Credentials, HTTPClient, groupId);
 
         public Action.ListFields ListFields()
-            => new Action.ListFields(Client, Proxy);
+            => new Action.ListFields(Credentials, HTTPClient);
 
         public Action.CreateField CreateField()
-            => new Action.CreateField(Client, Proxy);
+            => new Action.CreateField(Credentials, HTTPClient);
 
-        public Action.DeleteField DeleteField(string fieldId)
-            => new Action.DeleteField(Client, Proxy, fieldId);
+        public Action.DeleteField DeleteField(String fieldId)
+            => new Action.DeleteField(Credentials, HTTPClient, fieldId);
 
-        public Action.EditField EditField(string fieldId)
-            => new Action.EditField(Client, Proxy, fieldId);
+        public Action.EditField EditField(String fieldId)
+            => new Action.EditField(Credentials, HTTPClient, fieldId);
 
-        public Action.ListFieldOptions ListFieldOptions(string fieldId)
-            => new Action.ListFieldOptions(Client, Proxy, fieldId);
+        public Action.ListFieldOptions ListFieldOptions(String fieldId)
+            => new Action.ListFieldOptions(Credentials, HTTPClient, fieldId);
 
-        public Action.BindContactToGroup BindContactToGroup(string contactId, string groupId)
-            => new Action.BindContactToGroup(Client, Proxy, contactId, groupId);
+        public Action.BindContactToGroup BindContactToGroup(String contactId, String groupId)
+            => new Action.BindContactToGroup(Credentials, HTTPClient, contactId, groupId);
 
-        public Action.UnbindContactFromGroup UnbindContactFromGroup(string contactId, string groupId)
-            => new Action.UnbindContactFromGroup(Client, Proxy, contactId, groupId);
+        public Action.UnbindContactFromGroup UnbindContactFromGroup(String contactId, String groupId)
+            => new Action.UnbindContactFromGroup(Credentials, HTTPClient, contactId, groupId);
 
-        public Action.ListContactGroups ListContactGroups(string contactId)
-            => new Action.ListContactGroups(Client, Proxy, contactId);
+        public Action.ListContactGroups ListContactGroups(String contactId)
+            => new Action.ListContactGroups(Credentials, HTTPClient, contactId);
 
-        public Action.GetContactGroup GetContactGroup(string contactId, string groupId)
-            => new Action.GetContactGroup(Client, Proxy, contactId, groupId);
+        public Action.GetContactGroup GetContactGroup(String contactId, String groupId)
+            => new Action.GetContactGroup(Credentials, HTTPClient, contactId, groupId);
 
-        public Action.CreateGroupPermission CreateGroupPermission(string groupId)
-            => new Action.CreateGroupPermission(Client, Proxy, groupId);
+        public Action.CreateGroupPermission CreateGroupPermission(String groupId)
+            => new Action.CreateGroupPermission(Credentials, HTTPClient, groupId);
 
-        public Action.DeleteGroupPermission DeleteGroupPermission(string groupId, string username)
-            => new Action.DeleteGroupPermission(Client, Proxy, groupId, username);
+        public Action.DeleteGroupPermission DeleteGroupPermission(String groupId, String username)
+            => new Action.DeleteGroupPermission(Credentials, HTTPClient, groupId, username);
 
-        public Action.GetGroupPermission GetGroupPermission(string groupId, string username)
-            => new Action.GetGroupPermission(Client, Proxy, groupId, username);
+        public Action.GetGroupPermission GetGroupPermission(String groupId, String username)
+            => new Action.GetGroupPermission(Credentials, HTTPClient, groupId, username);
 
-        public Action.EditGroupPermission EditGroupPermission(string groupId, string username)
-            => new Action.EditGroupPermission(Client, Proxy, groupId, username);
+        public Action.EditGroupPermission EditGroupPermission(String groupId, String username)
+            => new Action.EditGroupPermission(Credentials, HTTPClient, groupId, username);
 
     }
 

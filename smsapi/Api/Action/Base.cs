@@ -11,11 +11,11 @@ namespace SMSApi.Api.Action
     public abstract class Base<T, TResult>
     {
 
-        protected Client Client  { get; }
-        protected IProxy Proxy   { get; }
+        protected Credentials Client  { get; }
+        protected HTTPClient Proxy   { get; }
 
-        public Base(Client Client,
-                    IProxy  Proxy)
+        public Base(Credentials Client,
+                    HTTPClient  Proxy)
         {
             this.Client = Client;
             this.Proxy  = Proxy;
@@ -27,7 +27,7 @@ namespace SMSApi.Api.Action
         abstract protected NameValueCollection Values();
 
 
-        protected virtual RequestMethod Method => RequestMethod.POST;
+        protected virtual RequestMethods Method => RequestMethods.POST;
 
         protected TT ResponseToObject<TT>(Stream data)
         {

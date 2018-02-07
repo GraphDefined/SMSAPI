@@ -6,8 +6,8 @@ namespace SMSApi.Api.Action
     public class EditGroup : Rest<Response.Group>
     {
 
-        public EditGroup(Client Client,
-                         IProxy  Proxy,
+        public EditGroup(Credentials Client,
+                         HTTPClient  Proxy,
                          String groupId)
             : base(Client, Proxy)
         {
@@ -16,7 +16,7 @@ namespace SMSApi.Api.Action
 
         protected override string Resource { get { return "contacts/groups/" + GroupId; } }
 
-        protected override RequestMethod Method { get { return RequestMethod.PUT; } }
+        protected override RequestMethods Method { get { return RequestMethods.PUT; } }
 
         protected override NameValueCollection Parameters
         {

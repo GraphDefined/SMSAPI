@@ -3,24 +3,24 @@ using System.Runtime.Serialization;
 
 namespace SMSApi.Api.Response
 {
-	[DataContract]
-	public class GroupPermission : Base
-	{
-		public GroupPermission() : base() { }
+    [DataContract]
+    public class GroupPermission : Base
+    {
+        public GroupPermission() : base() { }
 
-		[DataMember(Name = "group_id", IsRequired = false)]
-		public readonly string GroupId;
-	
-		[DataMember(Name = "username", IsRequired = false)]
-		public readonly string Username;
+        [DataMember(Name = "group_id", IsRequired = false)]
+        public readonly string GroupId;
 
-		[DataMember(Name = "write", IsRequired = false)]
-		public readonly bool Write;
+        [DataMember(Name = "username", IsRequired = false)]
+        public readonly string Username;
 
-		[DataMember(Name = "read", IsRequired = false)]
-		public readonly bool Read;
+        [DataMember(Name = "write", IsRequired = false)]
+        public readonly bool Write;
 
-		[DataMember(Name = "send", IsRequired = false)]
-		public readonly bool Send;
-	}
+        [DataMember(Name = "read", IsRequired = false)]
+        public readonly bool Read;
+
+        [DataMember(Name = "send", IsRequired = false)]
+        public readonly bool Send;
+    }
 }

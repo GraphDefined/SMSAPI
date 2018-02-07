@@ -5,8 +5,8 @@ namespace SMSApi.Api.Action
     public class PhonebookGroupAdd : BaseSimple<Response.Group>
     {
 
-        public PhonebookGroupAdd(Client Client,
-                                 IProxy  Proxy)
+        public PhonebookGroupAdd(Credentials Client,
+                                 HTTPClient  Proxy)
 
             : base(Client, Proxy)
 

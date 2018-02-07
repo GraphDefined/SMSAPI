@@ -6,8 +6,8 @@ namespace SMSApi.Api.Action
     public class ListFields : Rest<Response.Fields>
     {
 
-        public ListFields(Client Client,
-                          IProxy Proxy)
+        public ListFields(Credentials Client,
+                          HTTPClient Proxy)
 
             : base(Client, Proxy)
 
@@ -15,7 +15,7 @@ namespace SMSApi.Api.Action
 
         protected override string Resource { get { return "contacts/fields"; } }
 
-        protected override RequestMethod Method { get { return RequestMethod.GET; } }
+        protected override RequestMethods Method { get { return RequestMethods.GET; } }
 
     }
 

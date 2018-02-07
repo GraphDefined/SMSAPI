@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 
 namespace SMSApi.Api.Action
 {
@@ -7,14 +9,19 @@ namespace SMSApi.Api.Action
     public class SMSSend : Send
     {
 
-        public SMSSend(Client Client,
-                       IProxy  Proxy)
+        public SMSSend(Credentials          Client,
+                       HTTPClient           Proxy,
+                       IEnumerable<String>  to,
+                       String               text)
 
             : base(Client, Proxy)
 
-        { }
+        {
+            this.To    = to;
+            this.Text  = text;
+        }
 
-        protected override string Uri() { return "sms.do"; }
+        protected override String Uri() { return "sms.do"; }
 
         protected override NameValueCollection Values()
         {
@@ -64,7 +71,7 @@ namespace SMSApi.Api.Action
             if (Test == true)
                 collection.Add("test", "1");
 
-            if (Idx != null && Idx.Length > 0)
+            if (Idx != null && Idx.Any())
             {
                 collection.Add("check_idx", (IdxCheck ? "1" : "0"));
                 collection.Add("idx", string.Join("|", Idx));
@@ -100,7 +107,8 @@ namespace SMSApi.Api.Action
 
         }
 
-        private string Text;
+        protected String Text { get; }
+
         private string DateExpire;
         private string Sender;
         private bool Single = false;
@@ -115,11 +123,11 @@ namespace SMSApi.Api.Action
         private string[] Params = null;
         private bool Details = true;
 
-        public SMSSend SetTo(string to)
-        {
-            this.To = new string[] { to };
-            return this;
-        }
+        //public SMSSend SetTo(string to)
+        //{
+        //    this.To = new string[] { to };
+        //    return this;
+        //}
 
         public SMSSend SetTo(string[] to)
         {
@@ -169,11 +177,11 @@ namespace SMSApi.Api.Action
             return this;
         }
 
-        public SMSSend SetText(string text)
-        {
-            this.Text = text;
-            return this;
-        }
+        //public SMSSend SetText(string text)
+        //{
+        //    this.Text = text;
+        //    return this;
+        //}
 
         public SMSSend SetDateExpire(string data)
         {

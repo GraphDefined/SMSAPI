@@ -1,48 +1,46 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
+using System.Collections.Generic;
 
 namespace SMSApi.Api.Action
 {
+
     public class SMSGet : BaseSimple<Response.Status>
     {
 
-        public SMSGet(Client Client,
-                      IProxy  Proxy)
+        protected IEnumerable<String> Ids   { get; }
 
-            : base(Client, Proxy)
 
-        { }
+        public SMSGet(Credentials  Credentials,
+                      HTTPClient   Proxy,
+                      String       Id)
 
-        protected override string Uri() { return "sms.do"; }
+            : base(Credentials, Proxy)
 
-        protected string[] id;
+        {
+            this.Ids = new String[] { Id };
+        }
+
+        public SMSGet(Credentials          Credentials,
+                      HTTPClient           Proxy,
+                      IEnumerable<String>  Ids)
+
+            : base(Credentials, Proxy)
+
+        {
+            this.Ids = Ids;
+        }
+
+
+        protected override String Uri() { return "sms.do"; }
 
         protected override NameValueCollection Values()
-        {
-
-            var collection = new NameValueCollection();
-
-            collection.Add("format", "json");
-
-            collection.Add("username", Client.Username);
-            collection.Add("password", Client.Password);
-
-            collection.Add("status", string.Join("|", id));
-
-            return collection;
-
-        }
-
-        public SMSGet Id(string id)
-        {
-            this.id = new string[] { id };
-            return this;
-        }
-
-        public SMSGet Ids(string[] ids)
-        {
-            this.id = ids;
-            return this;
-        }
+            => new NameValueCollection {
+                   { "format",   "json" },
+                   { "username", Client.Username },
+                   { "password", Client.Password },
+                   { "status",   String.Join("|", Ids) }
+               };
 
     }
 

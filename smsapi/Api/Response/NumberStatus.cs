@@ -24,19 +24,19 @@ namespace SMSApi.Api.Response
 
         [DataMember(Name = "number", IsRequired = true)]
         public readonly string Number;
-		
+
         [DataMember(Name = "mcc", IsRequired = false)]
         public readonly int MCC;
 
         [DataMember(Name = "mnc", IsRequired = false)]
         public readonly int MNC;
-		
-		[DataMember(Name = "info", IsRequired = false)]
+
+        [DataMember(Name = "info", IsRequired = false)]
         public readonly string Info;
 
-		[DataMember(Name = "status", IsRequired = false)]
+        [DataMember(Name = "status", IsRequired = false)]
         public readonly string Status;
-		
+
         [DataMember(Name = "date", IsRequired = false)]
         public readonly int Date;
 

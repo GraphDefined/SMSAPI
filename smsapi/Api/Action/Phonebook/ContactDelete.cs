@@ -5,8 +5,8 @@ namespace SMSApi.Api.Action
     public class PhonebookContactDelete : BaseSimple<Response.Base>
     {
 
-        public PhonebookContactDelete(Client Client,
-                                      IProxy Proxy)
+        public PhonebookContactDelete(Credentials Client,
+                                      HTTPClient Proxy)
 
             : base(Client, Proxy)
 

@@ -1,5 +1,5 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SMSApi.Api
 {
@@ -11,65 +11,29 @@ namespace SMSApi.Api
             : base()
         { }
 
-        public SMSFactory(Client client)
-            : base(client)
+        public SMSFactory(Credentials Credentials)
+            : base(Credentials)
         { }
 
-        public SMSFactory(Client client, IProxy proxy)
-            : base(client, proxy)
+        public SMSFactory(Credentials Credentials, HTTPClient proxy)
+            : base(Credentials, proxy)
         { }
 
 
-        public Action.SMSDelete ActionDelete(string id = null)
-        {
+        public Action.SMSDelete ActionDelete(String Id)
+            => new Action.SMSDelete(Credentials, HTTPClient, Id);
 
-            Action.SMSDelete action = new Action.SMSDelete(Client, Proxy);
-            action.Id(id);
+        public Action.SMSGet    ActionGet   (String Id)
+            => new Action.SMSGet   (Credentials, HTTPClient, Id);
 
-            return action;
+        public Action.SMSGet    ActionGet   (IEnumerable<String> Ids)
+            => new Action.SMSGet   (Credentials, HTTPClient, Ids);
 
-        }
+        public Action.SMSSend   ActionSend  (String text, String to)
+            => new Action.SMSSend  (Credentials, HTTPClient, new String[] { to }, text);
 
-        public Action.SMSGet ActionGet(string id = null)
-        {
-
-            Action.SMSGet action = new Action.SMSGet(Client, Proxy);
-            action.Id(id);
-
-            return action;
-
-        }
-
-        public Action.SMSGet ActionGet(string[] id)
-        {
-
-            Action.SMSGet action = new Action.SMSGet(Client, Proxy);
-            action.Ids(id);
-
-            return action;
-
-        }
-
-        public Action.SMSSend ActionSend(String to    = null,
-                                         String text  = null)
-        {
-
-            return ActionSend(to == null ? null : new String[] { to },
-                              text);
-
-        }
-
-        public Action.SMSSend ActionSend(String[] to,
-                                         String   text = null)
-        {
-
-            Action.SMSSend action = new Action.SMSSend(Client, Proxy);
-            action.SetTo(to);
-            action.SetText(text);
-
-            return action;
-
-        }
+        public Action.SMSSend   ActionSend  (String text, String[] to)
+            => new Action.SMSSend  (Credentials, HTTPClient, to, text);
 
     }
 

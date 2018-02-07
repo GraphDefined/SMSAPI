@@ -1,4 +1,6 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
 {
@@ -6,43 +8,40 @@ namespace SMSApi.Api.Action
     public class HLRCheckNumber : BaseSimple<Response.CheckNumber>
     {
 
-        public HLRCheckNumber(Client Client,
-                              IProxy  Proxy)
+        protected IEnumerable<String>  Numbers   { get; }
+
+
+        public HLRCheckNumber(Credentials Client,
+                              HTTPClient  Proxy,
+                              String      Number)
 
             : base(Client, Proxy)
 
-        { }
-
-        protected override string Uri() { return "hlrsync.do"; }
-
-        protected string[] numbers;
-
-        public HLRCheckNumber SetNumber(string number)
         {
-            this.numbers = new string[] { number };
-            return this;
+            this.Numbers = new String[] { Number };
         }
 
-/*
-        public HLRCheckNumber SetNumber(string[] numbers)
+        public HLRCheckNumber(Credentials          Client,
+                              HTTPClient           Proxy,
+                              IEnumerable<String>  Numbers)
+
+            : base(Client, Proxy)
+
         {
-            this.numbers = numbers;
-            return this;
+            this.Numbers = Numbers;
         }
-*/
+
+
+        protected override String Uri() { return "hlrsync.do"; }
 
         protected override NameValueCollection Values()
-        {
-            var collection = new NameValueCollection();
+            => new NameValueCollection {
+                   { "format",   "json" },
+                   { "username", Client.Username },
+                   { "password", Client.Password },
+                   { "number",   String.Join(",", Numbers) }
+               };
 
-            collection.Add("format", "json");
+    }
 
-            collection.Add("username", Client.Username);
-            collection.Add("password", Client.Password);
-
-            collection.Add("number", string.Join(",", numbers));
-
-            return collection;
-        }
-    }   
 }

@@ -8,36 +8,28 @@ namespace SMSApi.Api.Action
     public abstract class Rest<T> : BaseSimple<T>
     {
 
-        public Rest(Client Client,
-                    IProxy  Proxy)
+        public Rest(Credentials Client,
+                    HTTPClient  Proxy)
 
             : base(Client, Proxy)
 
         { }
 
-        protected override string Uri()
-        {
-            string uri = Resource;
-            if (RequestMethod.GET.Equals(Method))
-            {
-                if (Parameters.Count > 0) uri += "?" + Parameters.ToString();
-            }
-            return uri;
-        }
+
+        protected override String Uri()
+            => Method == RequestMethods.GET && Parameters.Count > 0
+                   ? Resource + "?" + Parameters.ToString()
+                   : Resource;
 
         protected override NameValueCollection Values()
-        {
-            var collection = new NameValueCollection();
-            if (RequestMethod.POST.Equals(Method) || RequestMethod.PUT.Equals(Method))
-            {
-                collection = Parameters;
-            }
-            return collection;
-        }
+            => Method == RequestMethods.POST || Method == RequestMethods.PUT
+                   ? Parameters
+                   : new NameValueCollection();
 
-        protected abstract string Resource { get; }
+        protected abstract String Resource { get; }
 
-        protected virtual NameValueCollection Parameters { get { return HttpUtility.ParseQueryString(string.Empty); } }
+        protected virtual NameValueCollection Parameters { get { return HttpUtility.ParseQueryString(String.Empty); } }
 
     }
+
 }

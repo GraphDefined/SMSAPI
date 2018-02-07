@@ -6,8 +6,8 @@ namespace SMSApi.Api.Action
     public class CreateField : Rest<Response.Field>
     {
 
-        public CreateField(Client Client,
-                           IProxy  Proxy)
+        public CreateField(Credentials Client,
+                           HTTPClient  Proxy)
 
             : base(Client, Proxy)
 
@@ -15,7 +15,7 @@ namespace SMSApi.Api.Action
 
         protected override string Resource { get { return "contacts/fields"; } }
 
-        protected override RequestMethod Method { get { return RequestMethod.POST; } }
+        protected override RequestMethods Method { get { return RequestMethods.POST; } }
 
         protected override NameValueCollection Parameters
         {

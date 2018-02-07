@@ -5,8 +5,8 @@ namespace SMSApi.Api.Action
 {
     public class EditField : Rest<Response.Field>
     {
-        public EditField(Client Client,
-                         IProxy  Proxy,
+        public EditField(Credentials Client,
+                         HTTPClient  Proxy,
                          String fieldId)
             : base(Client, Proxy)
         {
@@ -15,7 +15,7 @@ namespace SMSApi.Api.Action
 
         protected override string Resource { get { return "contacts/fields/" + FieldId; } }
 
-        protected override RequestMethod Method { get { return RequestMethod.PUT; } }
+        protected override RequestMethods Method { get { return RequestMethods.PUT; } }
 
         protected override NameValueCollection Parameters
         {

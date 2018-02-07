@@ -4,8 +4,8 @@
     public abstract class BaseSimple<T> : Base<T, T>
     {
 
-        public BaseSimple(Client Client,
-                          IProxy  Proxy)
+        public BaseSimple(Credentials Client,
+                          HTTPClient  Proxy)
 
             : base(Client, Proxy)
 

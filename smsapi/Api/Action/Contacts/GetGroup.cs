@@ -5,8 +5,8 @@ namespace SMSApi.Api.Action
     public class GetGroup : Rest<Response.Group>
     {
 
-        public GetGroup(Client Client,
-                        IProxy  Proxy,
+        public GetGroup(Credentials Client,
+                        HTTPClient  Proxy,
                         String groupId)
             : base(Client, Proxy)
         {
@@ -15,7 +15,7 @@ namespace SMSApi.Api.Action
 
         protected override string Resource { get { return "contacts/groups/" + GroupId; } }
 
-        protected override RequestMethod Method { get { return RequestMethod.GET; } }
+        protected override RequestMethods Method { get { return RequestMethods.GET; } }
 
 
         public string GroupId { get; }

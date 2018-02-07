@@ -7,8 +7,8 @@ namespace SMSApi.Api.Action
     public class DeleteGroup : Rest<Response.Base>
     {
 
-        public DeleteGroup(Client Client,
-                           IProxy  Proxy,
+        public DeleteGroup(Credentials Client,
+                           HTTPClient  Proxy,
                            String groupId)
             : base(Client, Proxy)
         {
@@ -17,7 +17,7 @@ namespace SMSApi.Api.Action
 
         protected override string Resource { get { return "contacts/groups/" + GroupId; } }
 
-        protected override RequestMethod Method { get { return RequestMethod.DELETE; } }
+        protected override RequestMethods Method { get { return RequestMethods.DELETE; } }
 
         public string GroupId { get; }
 

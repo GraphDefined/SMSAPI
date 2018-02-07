@@ -1,37 +1,34 @@
-﻿using System.Collections.Specialized;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
 {
+
     public class UserList : BaseArray<Response.User>
     {
-        public UserList(Client Client,
-                        IProxy  Proxy)
-            : base(Client, Proxy)
-        { }
 
-        protected override string Uri() { return "user.do"; }
+        protected String Username { get; }
+
+        public UserList(Credentials  Client,
+                        HTTPClient  Proxy,
+                        String  Username = null)
+
+            : base(Client, Proxy)
+
+        {
+            this.Username = Username;
+        }
+
+        protected override String Uri() { return "user.do"; }
 
         protected override NameValueCollection Values()
-        {
-            var collection = new NameValueCollection();
+            => new NameValueCollection {
+                   { "format",    "json" },
+                   { "username",  Client.Username },
+                   { "password",  Client.Password },
+                   { "list",      "1" }
+               };
 
-            collection.Add("format", "json");
-
-            collection.Add("username", Client.Username);
-            collection.Add("password", Client.Password);
-
-            collection.Add("list", "1");
-
-            return collection;
-        }
-
-        protected string username;
-
-        public UserList Username(string username)
-        {
-            this.username = username;
-            return this;
-        }
     }
+
 }

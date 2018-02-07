@@ -5,8 +5,8 @@ namespace SMSApi.Api.Action
     public class PhonebookContactList : BaseSimple<Response.Contacts>
     {
 
-        public PhonebookContactList(Client Client,
-                                    IProxy  Proxy)
+        public PhonebookContactList(Credentials Client,
+                                    HTTPClient  Proxy)
 
             : base(Client, Proxy)
 

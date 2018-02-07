@@ -7,8 +7,8 @@ namespace SMSApi.Api.Action
     public class ListGroups : Rest<Response.Groups>
     {
 
-        public ListGroups(Client Client,
-                          IProxy Proxy)
+        public ListGroups(Credentials Client,
+                          HTTPClient Proxy)
 
             : base(Client, Proxy)
 
@@ -16,7 +16,7 @@ namespace SMSApi.Api.Action
 
         protected override string Resource { get { return "contacts/groups"; } }
 
-        protected override RequestMethod Method { get { return RequestMethod.GET; } }
+        protected override RequestMethods Method { get { return RequestMethods.GET; } }
 
         protected override NameValueCollection Parameters
         {

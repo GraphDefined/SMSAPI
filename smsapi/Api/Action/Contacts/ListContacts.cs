@@ -6,8 +6,8 @@ namespace SMSApi.Api.Action
     public class ListContacts : Rest<Response.Contacts>
     {
 
-        public ListContacts(Client Client,
-                            IProxy  Proxy)
+        public ListContacts(Credentials Client,
+                            HTTPClient  Proxy)
 
             : base(Client, Proxy)
 
@@ -15,7 +15,7 @@ namespace SMSApi.Api.Action
 
         protected override string Resource { get { return "contacts"; } }
 
-        protected override RequestMethod Method { get { return RequestMethod.GET; } }
+        protected override RequestMethods Method { get { return RequestMethods.GET; } }
 
         protected override NameValueCollection Parameters
         {

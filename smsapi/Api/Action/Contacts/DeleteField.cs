@@ -5,8 +5,8 @@ namespace SMSApi.Api.Action
     public class DeleteField : Rest<Response.Base>
     {
 
-        public DeleteField(Client Client,
-                           IProxy  Proxy,
+        public DeleteField(Credentials Client,
+                           HTTPClient  Proxy,
                            String fieldId)
             : base(Client, Proxy)
         {
@@ -15,7 +15,7 @@ namespace SMSApi.Api.Action
 
         protected override string Resource { get { return "contacts/fields/" + FieldId; } }
 
-        protected override RequestMethod Method { get { return RequestMethod.DELETE; } }
+        protected override RequestMethods Method { get { return RequestMethods.DELETE; } }
 
         public string FieldId { get; }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 
 /**
  * add_user * Nazwa dodawanego podużytkownika bez prefiksu użytkownika głównego
@@ -17,66 +18,64 @@ namespace SMSApi.Api.Action
     public class UserAdd : BaseSimple<Response.User>
     {
 
-        public UserAdd(Client Client,
-                       IProxy  Proxy)
+        protected String newUsername { get; }
+
+        public UserAdd(Credentials  Client,
+                       HTTPClient  Proxy,
+                       String  Username)
 
             : base(Client, Proxy)
 
         {
-            limit = -1;
-            monthLimit = -1;
-            active = false;
-            phonebook = -1;
-            senders = -1;
+            this.newUsername = Username;
+            limit       = -1;
+            monthLimit  = -1;
+            active      = false;
+            phonebook   = -1;
+            senders     = -1;
         }
 
-        protected override string Uri() { return "user.do"; }
+        protected override String Uri() { return "user.do"; }
 
-        const int SENDERS_NOSHARE = 0;
-        const int SENDERS_SHARE = 1;
+        const int SENDERS_NOSHARE   = 0;
+        const int SENDERS_SHARE     = 1;
 
         const int PHONEBOOK_NOSHARE = 0;
-        const int PHONEBOOK_SHARE = 1;
+        const int PHONEBOOK_SHARE   = 1;
 
-        protected string newUsername;
+        //protected string newUsername;
         protected string password;
         protected string passwordApi;
         protected double limit;
         protected double monthLimit;
-        protected int senders;
-        protected int phonebook;
-        protected bool active;
+        protected int    senders;
+        protected int    phonebook;
+        protected bool   active;
         protected string info;
-        protected bool withoutPrefix = false;
+        protected bool   withoutPrefix = false;
 
         protected override NameValueCollection Values()
         {
 
-            var collection = new NameValueCollection();
+            var collection = new NameValueCollection {
+                                 { "format",   "json" },
+                                 { "username", Client.Username },
+                                 { "password", Client.Password },
+                                 { "add_user", newUsername }
+                             };
 
-            collection.Add("format", "json");
-
-            collection.Add("username", Client.Username);
-            collection.Add("password", Client.Password);
-
-            collection.Add("add_user", newUsername);
-            if (password != null) collection.Add("pass", password);
-            if (passwordApi != null) collection.Add("pass_api", passwordApi);
-            if (limit >= 0) collection.Add("limit", limit.ToString());
-            if (monthLimit >= 0) collection.Add("month_limit", monthLimit.ToString());
-            if (senders >= 0) collection.Add("senders", senders.ToString());
-            if (phonebook >= 0) collection.Add("phonebook", phonebook.ToString());
+            if (password    != null) collection.Add("pass",         password);
+            if (passwordApi != null) collection.Add("pass_api",     passwordApi);
+            if (limit       >= 0)    collection.Add("limit",        limit.ToString());
+            if (monthLimit  >= 0)    collection.Add("month_limit",  monthLimit.ToString());
+            if (senders     >= 0)    collection.Add("senders",      senders.ToString());
+            if (phonebook   >= 0)    collection.Add("phonebook",    phonebook.ToString());
             collection.Add("active", (active == true ? "1" : "0") );
-            if (info != null) collection.Add("info", info);
-            if (withoutPrefix) collection.Add("without_prefix", "1");
+            if (info        != null) collection.Add("info", info);
+            if (withoutPrefix)       collection.Add("without_prefix", "1");
 
             return collection;
-        }
 
-        public UserAdd SetUsername(string username)
-        {
-            this.newUsername = username;
-            return this;
         }
 
         public UserAdd SetPassword(string password)
@@ -132,5 +131,7 @@ namespace SMSApi.Api.Action
             this.withoutPrefix = flag;
             return this;
         }
+
     }
+
 }

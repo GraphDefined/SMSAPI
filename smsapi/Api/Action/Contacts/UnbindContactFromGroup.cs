@@ -5,8 +5,8 @@ namespace SMSApi.Api.Action
     public class UnbindContactFromGroup : Rest<Response.Base>
     {
 
-        public UnbindContactFromGroup(Client Client,
-                                      IProxy  Proxy,
+        public UnbindContactFromGroup(Credentials Client,
+                                      HTTPClient  Proxy,
                                       String contactId,
                                       String groupId)
             : base(Client, Proxy)
@@ -17,7 +17,7 @@ namespace SMSApi.Api.Action
 
         protected override string Resource { get { return "contacts/" + ContactId + "/groups/" + GroupId; } }
 
-        protected override RequestMethod Method { get { return RequestMethod.DELETE; } }
+        protected override RequestMethods Method { get { return RequestMethods.DELETE; } }
 
         public string ContactId { get; }
         public string GroupId { get; }

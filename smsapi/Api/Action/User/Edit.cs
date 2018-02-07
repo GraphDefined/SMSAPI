@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 
 /**
  * add_user * Nazwa dodawanego podużytkownika bez prefiksu użytkownika głównego
@@ -14,13 +15,20 @@
  */
 namespace SMSApi.Api.Action
 {
+
     public class UserEdit : BaseSimple<Response.User>
     {
 
-        public UserEdit(Client Client,
-                        IProxy Proxy)
+        protected String Username { get; }
+
+        public UserEdit(Credentials  Client,
+                        HTTPClient  Proxy,
+                        String  Username)
+
             : base(Client, Proxy)
+
         {
+            this.Username = Username;
             limit = -1;
             monthLimit = -1;
             active = -1;
@@ -30,13 +38,12 @@ namespace SMSApi.Api.Action
 
         protected override string Uri() { return "user.do"; }
 
-        const int SENDERS_NOSHARE = 0;
-        const int SENDERS_SHARE = 1;
+        const int SENDERS_NOSHARE   = 0;
+        const int SENDERS_SHARE     = 1;
 
         const int PHONEBOOK_NOSHARE = 0;
-        const int PHONEBOOK_SHARE = 1;
+        const int PHONEBOOK_SHARE   = 1;
 
-        protected string username;
         protected string password;
         protected string passwordApi;
         protected double limit;
@@ -49,31 +56,26 @@ namespace SMSApi.Api.Action
 
         protected override NameValueCollection Values()
         {
-            var collection = new NameValueCollection();
 
-            collection.Add("format", "json");
+            var collection = new NameValueCollection {
+                                 { "format",   "json" },
+                                 { "username", Client.Username },
+                                 { "password", Client.Password },
+                                 { "set_user", Username }
+                             };
 
-            collection.Add("username", Client.Username);
-            collection.Add("password", Client.Password);
-
-            collection.Add("set_user", username);
-            if (password != null) collection.Add("pass", password);
-            if (passwordApi != null) collection.Add("pass_api", passwordApi);
-            if (limit >= 0) collection.Add("limit", limit.ToString());
-            if (monthLimit >= 0) collection.Add("month_limit", monthLimit.ToString());
-            if (senders >= 0) collection.Add("senders", senders.ToString());
-            if (phonebook >= 0) collection.Add("phonebook", phonebook.ToString());
-            if (active >= 0) collection.Add("active", (active > 0 ? "1" : "0"));
-            if (info != null) collection.Add("info", info);
+            if (password    != null) collection.Add("pass",        password);
+            if (passwordApi != null) collection.Add("pass_api",    passwordApi);
+            if (limit       >= 0)    collection.Add("limit",       limit.ToString());
+            if (monthLimit  >= 0)    collection.Add("month_limit", monthLimit.ToString());
+            if (senders     >= 0)    collection.Add("senders",     senders.ToString());
+            if (phonebook   >= 0)    collection.Add("phonebook",   phonebook.ToString());
+            if (active      >= 0)    collection.Add("active",      (active > 0 ? "1" : "0"));
+            if (info        != null) collection.Add("info",        info);
             if (withoutPrefix) collection.Add("without_prefix", "1");
 
             return collection;
-        }
 
-        public UserEdit Username(string username)
-        {
-            this.username = username;
-            return this;
         }
 
         public UserEdit SetPassword(string password)
@@ -129,5 +131,7 @@ namespace SMSApi.Api.Action
             this.withoutPrefix = flag;
             return this;
         }
+
     }
+
 }
