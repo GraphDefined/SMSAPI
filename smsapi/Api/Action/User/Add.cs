@@ -35,7 +35,7 @@ namespace SMSApi.Api.Action
             senders     = -1;
         }
 
-        protected override String Uri() { return "user.do"; }
+        protected override String Uri => "user.do";
 
         const int SENDERS_NOSHARE   = 0;
         const int SENDERS_SHARE     = 1;

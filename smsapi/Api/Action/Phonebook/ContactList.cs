@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
 {
@@ -15,7 +16,7 @@ namespace SMSApi.Api.Action
             limit  = 0;
         }
 
-        protected override string Uri() { return "phonebook.do"; }
+        protected override String Uri => "phonebook.do";
 
         protected string number;
         protected string[] groups;

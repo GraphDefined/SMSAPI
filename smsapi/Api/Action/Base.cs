@@ -24,7 +24,7 @@ namespace SMSApi.Api.Action
         }
 
 
-        abstract protected String              Uri();
+        abstract protected String              Uri      { get; }
         abstract protected NameValueCollection Values();
 
         protected virtual RequestMethods Method => RequestMethods.POST;
@@ -70,7 +70,7 @@ namespace SMSApi.Api.Action
 
             Validate();
 
-            Stream data = HTTPClient.Execute(Uri(), Values(), Files(), Method);
+            Stream data = HTTPClient.Execute(Uri, Values(), Files(), Method);
 
             var result = default(TResult);
 
@@ -84,7 +84,7 @@ namespace SMSApi.Api.Action
             catch (System.Runtime.Serialization.SerializationException e)
             {
                 //Problem z prasowaniem json'a
-                throw new HostException(e.Message + " /" + Uri(), HostException.E_JSON_DECODE);
+                throw new HostException(e.Message + " /" + Uri, HostException.E_JSON_DECODE);
             }
 
             data.Close();

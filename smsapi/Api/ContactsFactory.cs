@@ -3,7 +3,7 @@ using System;
 namespace SMSApi.Api
 {
 
-    public class ContactsFactory : Factory
+    public class ContactsFactory : ABaseAPI
     {
 
         public ContactsFactory(Credentials client)

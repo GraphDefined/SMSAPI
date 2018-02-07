@@ -11,17 +11,17 @@ namespace SMSApi.Api.Action
 
         public SMSSend(Credentials          Credentials,
                        HTTPClient           HTTPClient,
-                       IEnumerable<String>  to,
-                       String               text)
+                       IEnumerable<String>  Recipients,
+                       String               SMSText)
 
             : base(Credentials, HTTPClient)
 
         {
-            this.To    = to;
-            this.Text  = text;
+            this.To    = Recipients;
+            this.Text  = SMSText;
         }
 
-        protected override String Uri() { return "sms.do"; }
+        protected override String Uri => "sms.do";
 
         protected override NameValueCollection Values()
         {

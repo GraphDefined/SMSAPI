@@ -11,7 +11,7 @@ namespace SMSApi.Api.Action
             : base(Client, Proxy)
         { }
 
-        protected override String Uri() { return "sender.do"; }
+        protected override String Uri => "sender.do";
 
         protected override NameValueCollection Values()
             => new NameValueCollection {

@@ -19,117 +19,69 @@ namespace SMSApi.Api.Action
     public class UserEdit : BaseSimple<Response.User>
     {
 
-        protected String Username { get; }
+        #region Data
 
-        public UserEdit(Credentials  Client,
-                        HTTPClient  Proxy,
-                        String  Username)
+        const Int32 SENDERS_NOSHARE    = 0;
+        const Int32 SENDERS_SHARE      = 1;
 
-            : base(Client, Proxy)
+        const Int32 PHONEBOOK_NOSHARE  = 0;
+        const Int32 PHONEBOOK_SHARE    = 1;
+
+        #endregion
+
+        protected String  Username        { get; }
+        protected String  Password        { get; set; }
+        protected String  PasswordApi     { get; set; }
+        protected Double  Limit           { get; set; }
+        protected Double  MonthLimit      { get; set; }
+        protected Int32   Senders         { get; set; }
+        protected Int32   Phonebook       { get; set; }
+        protected Int32   Active          { get; set; }
+        protected String  Info            { get; set; }
+        protected Boolean WithoutPrefix   { get; set; }
+
+        public UserEdit(Credentials  Credentials,
+                        HTTPClient   HTTPClient,
+                        String       Username)
+
+            : base(Credentials, HTTPClient)
 
         {
-            this.Username = Username;
-            limit = -1;
-            monthLimit = -1;
-            active = -1;
-            phonebook = -1;
-            senders = -1;
+
+            this.Username       = Username;
+            this.Limit          = -1;
+            this.MonthLimit     = -1;
+            this.Active         = -1;
+            this.Phonebook      = -1;
+            this.Senders        = -1;
+            this.WithoutPrefix  = false;
+
         }
 
-        protected override string Uri() { return "user.do"; }
-
-        const int SENDERS_NOSHARE   = 0;
-        const int SENDERS_SHARE     = 1;
-
-        const int PHONEBOOK_NOSHARE = 0;
-        const int PHONEBOOK_SHARE   = 1;
-
-        protected string password;
-        protected string passwordApi;
-        protected double limit;
-        protected double monthLimit;
-        protected int senders;
-        protected int phonebook;
-        protected int active;
-        protected string info;
-        protected bool withoutPrefix = false;
+        protected override String Uri => "user.do";
 
         protected override NameValueCollection Values()
         {
 
             var collection = new NameValueCollection {
-                                 { "format",   "json" },
-                                 { "username", Credentials.Username },
-                                 { "password", Credentials.Password },
-                                 { "set_user", Username }
+                                 { "format",    "json" },
+                                 { "username",  Credentials.Username },
+                                 { "password",  Credentials.Password },
+                                 { "set_user",  Username }
                              };
 
-            if (password    != null) collection.Add("pass",        password);
-            if (passwordApi != null) collection.Add("pass_api",    passwordApi);
-            if (limit       >= 0)    collection.Add("limit",       limit.ToString());
-            if (monthLimit  >= 0)    collection.Add("month_limit", monthLimit.ToString());
-            if (senders     >= 0)    collection.Add("senders",     senders.ToString());
-            if (phonebook   >= 0)    collection.Add("phonebook",   phonebook.ToString());
-            if (active      >= 0)    collection.Add("active",      (active > 0 ? "1" : "0"));
-            if (info        != null) collection.Add("info",        info);
-            if (withoutPrefix) collection.Add("without_prefix", "1");
+            if (Password    != null) collection.Add("pass",            Password);
+            if (PasswordApi != null) collection.Add("pass_api",        PasswordApi);
+            if (Limit       >= 0)    collection.Add("limit",           Limit.     ToString());
+            if (MonthLimit  >= 0)    collection.Add("month_limit",     MonthLimit.ToString());
+            if (Senders     >= 0)    collection.Add("senders",         Senders.   ToString());
+            if (Phonebook   >= 0)    collection.Add("phonebook",       Phonebook. ToString());
+            if (Active      >= 0)    collection.Add("active",          Active > 0 ? "1" : "0");
+            if (Info        != null) collection.Add("info",            Info);
+            if (WithoutPrefix)       collection.Add("without_prefix",  "1");
 
             return collection;
 
-        }
-
-        public UserEdit SetPassword(string password)
-        {
-            this.password = password;
-            return this;
-        }
-
-        public UserEdit SetPasswordApi(string password)
-        {
-            this.passwordApi = password;
-            return this;
-        }
-
-        public UserEdit SetLimit(double limit)
-        {
-            this.limit = limit;
-            return this;
-        }
-
-        public UserEdit SetMonthLimit(double limit)
-        {
-            this.monthLimit = limit;
-            return this;
-        }
-
-        public UserEdit SetSenders(int flag)
-        {
-            this.senders = flag;
-            return this;
-        }
-
-        public UserEdit SetPhonebook(int flag)
-        {
-            this.phonebook = flag;
-            return this;
-        }
-
-        public UserEdit SetActive(bool flag)
-        {
-            this.active = (flag ? 1 : 0);
-            return this;
-        }
-
-        public UserEdit SetInfo(string text)
-        {
-            this.info = text;
-            return this;
-        }
-
-        public UserEdit SetWithoutPrefix(bool flag)
-        {
-            this.withoutPrefix = flag;
-            return this;
         }
 
     }

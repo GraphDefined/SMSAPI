@@ -17,7 +17,7 @@ namespace SMSApi.Api.Action
             this.Id = Id;
         }
 
-        protected override String Uri() { return "sms.do"; }
+        protected override String Uri => "sms.do";
 
         protected String Id { get; }
 

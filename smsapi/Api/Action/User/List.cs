@@ -9,17 +9,17 @@ namespace SMSApi.Api.Action
 
         protected String Username { get; }
 
-        public UserList(Credentials  Client,
-                        HTTPClient  Proxy,
-                        String  Username = null)
+        public UserList(Credentials  Credentials,
+                        HTTPClient   HTTPClient,
+                        String       Username = null)
 
-            : base(Client, Proxy)
+            : base(Credentials, HTTPClient)
 
         {
             this.Username = Username;
         }
 
-        protected override String Uri() { return "user.do"; }
+        protected override String Uri => "user.do";
 
         protected override NameValueCollection Values()
             => new NameValueCollection {

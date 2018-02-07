@@ -79,8 +79,8 @@
     <Compile Include="Exceptions\HostException.cs" />
     <Compile Include="Api\Response\Array.cs" />
     <Compile Include="Api\Response\User.cs" />
-    <Compile Include="Api\UserFactory.cs" />
-    <Compile Include="Api\HLRFactory.cs" />
+    <Compile Include="Api\UsersAPI.cs" />
+    <Compile Include="Api\HLRAPI.cs" />
     <Compile Include="Api\PhonebookFactory.cs" />
     <Compile Include="Api\Response\CheckNumber.cs" />
     <Compile Include="Api\Response\Contact.cs" />
@@ -93,9 +93,9 @@
     <Compile Include="Api\Response\Sender.cs" />
     <Compile Include="Api\Response\Senders.cs" />
     <Compile Include="Api\Response\NumberStatus.cs" />
-    <Compile Include="Api\SenderFactory.cs" />
+    <Compile Include="Api\SenderAPI.cs" />
     <Compile Include="Credentials.cs" />
-    <Compile Include="Api\Factory.cs" />
+    <Compile Include="Api\ABaseAPI.cs" />
     <Compile Include="Exceptions\ActionException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestMethods.cs" />
@@ -104,7 +104,7 @@
     <Compile Include="Api\Response\Base.cs" />
     <Compile Include="Api\Response\MessageStatus.cs" />
     <Compile Include="Api\Response\Status.cs" />
-    <Compile Include="Api\SMSFactory.cs" />
+    <Compile Include="Api\SMSAPI.cs" />
     <Compile Include="Exceptions\SMSAPIException.cs" />
     <Compile Include="Api\ContactsFactory.cs" />
     <Compile Include="Api\Action\Contacts\ListContacts.cs" />

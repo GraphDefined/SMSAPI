@@ -16,7 +16,7 @@ namespace SMSApi.Api.Action
         { }
 
 
-        protected override String Uri()
+        protected override String Uri
             => Method == RequestMethods.GET && Parameters.Count > 0
                    ? Resource + "?" + Parameters.ToString()
                    : Resource;

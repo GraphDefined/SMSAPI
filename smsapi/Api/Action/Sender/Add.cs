@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
 {
+
     public class SenderAdd : BaseSimple<Response.Base>
     {
 
@@ -16,7 +17,7 @@ namespace SMSApi.Api.Action
 
         private String Name { get; }
 
-        protected override String Uri() { return "sender.do"; }
+        protected override String Uri => "sender.do";
 
         protected override NameValueCollection Values()
             => new NameValueCollection {

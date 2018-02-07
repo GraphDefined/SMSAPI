@@ -32,7 +32,7 @@ namespace SMSApi.Api.Action
         }
 
 
-        protected override String Uri() { return "sms.do"; }
+        protected override String Uri => "sms.do";
 
         protected override NameValueCollection Values()
             => new NameValueCollection {

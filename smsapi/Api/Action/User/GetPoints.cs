@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 
 namespace SMSApi.Api.Action
 {
@@ -10,7 +11,7 @@ namespace SMSApi.Api.Action
             : base(Client, Proxy)
         { }
 
-        protected override string Uri() { return "user.do"; }
+        protected override String Uri => "user.do";
 
         protected override NameValueCollection Values()
         {

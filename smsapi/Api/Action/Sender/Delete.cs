@@ -14,7 +14,7 @@ namespace SMSApi.Api.Action
             this.Name = Name;
         }
 
-        protected override String Uri() { return "sender.do"; }
+        protected override String Uri => "sender.do";
 
         private String Name { get; }
 

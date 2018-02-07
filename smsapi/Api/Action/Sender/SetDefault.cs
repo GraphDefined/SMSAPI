@@ -14,7 +14,7 @@ namespace SMSApi.Api.Action
             this.DefaultName = DefaultName;
         }
 
-        protected override String Uri() { return "sender.do"; }
+        protected override String Uri => "sender.do";
 
         private String DefaultName { get; }
 

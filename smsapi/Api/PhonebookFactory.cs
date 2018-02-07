@@ -3,7 +3,7 @@
 namespace SMSApi.Api
 {
     [Obsolete("use ContactsFactory instead")]
-    public class PhonebookFactory : Factory
+    public class PhonebookFactory : ABaseAPI
     {
 
         public PhonebookFactory() : base() { }
