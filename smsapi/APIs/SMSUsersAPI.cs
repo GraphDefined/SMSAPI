@@ -4,21 +4,21 @@ namespace SMSApi.Api
 {
 
     /// <summary>
-    /// The users API.
+    /// The SMS Users API.
     /// </summary>
-    public class UsersAPI : ABaseAPI
+    public class SMSUsersAPI : ABaseAPI
     {
 
         #region Constructor(s)
 
-        public UsersAPI()
+        public SMSUsersAPI()
         { }
 
-        public UsersAPI(Credentials  Credentials)
+        public SMSUsersAPI(Credentials  Credentials)
             : base(Credentials)
         { }
 
-        public UsersAPI(Credentials  Credentials,
+        public SMSUsersAPI(Credentials  Credentials,
                         HTTPClient   HTTPClient)
             : base(Credentials, HTTPClient)
         { }

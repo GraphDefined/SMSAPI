@@ -4,21 +4,21 @@ namespace SMSApi.Api
 {
 
     /// <summary>
-    /// The sender API.
+    /// The SMS Sender API.
     /// </summary>
-    public class SenderAPI : ABaseAPI
+    public class SMSSenderAPI : ABaseAPI
     {
 
         #region Constructor(s)
 
-        public SenderAPI()
+        public SMSSenderAPI()
         { }
 
-        public SenderAPI(Credentials  Credentials)
+        public SMSSenderAPI(Credentials  Credentials)
             : base(Credentials)
         { }
 
-        public SenderAPI(Credentials  Credentials,
+        public SMSSenderAPI(Credentials  Credentials,
                          HTTPClient   HTTPClient)
             : base(Credentials,
                    HTTPClient)
