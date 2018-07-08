@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{05C2A720-2CD1-401B-A832-9CE85313C248}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>com.GraphDefined.SMSAPI</RootNamespace>
+    <AssemblyName>com.GraphDefined.SMSAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\com.GraphDefined.SMSAPI.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actions\Base.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Actions\BaseSimple.cs" />
+    <Compile Include="Actions\BaseArray.cs" />
+    <Compile Include="Actions\Phonebook\ContactGet.cs" />
+    <Compile Include="Actions\Phonebook\ContactList.cs" />
+    <Compile Include="Actions\Phonebook\ContactAdd.cs" />
+    <Compile Include="Actions\Phonebook\ContactDelete.cs" />
+    <Compile Include="Actions\Phonebook\ContactEdit.cs" />
+    <Compile Include="Actions\Phonebook\GroupDelete.cs" />
+    <Compile Include="Actions\Phonebook\GroupEdit.cs" />
+    <Compile Include="Actions\Phonebook\GroupAdd.cs" />
+    <Compile Include="Actions\Phonebook\GroupGet.cs" />
+    <Compile Include="Actions\Phonebook\GroupList.cs" />
+    <Compile Include="Actions\Sender\SetDefault.cs" />
+    <Compile Include="Actions\Sender\Delete.cs" />
+    <Compile Include="Actions\HLR\CheckNumber.cs" />
+    <Compile Include="Actions\Send.cs" />
+    <Compile Include="Actions\Sender\Add.cs" />
+    <Compile Include="Actions\Sender\List.cs" />
+    <Compile Include="Actions\SMS\Delete.cs" />
+    <Compile Include="Actions\SMS\Get.cs" />
+    <Compile Include="Actions\SMS\Send.cs" />
+    <Compile Include="Actions\User\Add.cs" />
+    <Compile Include="Actions\User\List.cs" />
+    <Compile Include="Actions\User\Get.cs" />
+    <Compile Include="Actions\User\Edit.cs" />
+    <Compile Include="Actions\User\GetPoints.cs" />
+    <Compile Include="Exceptions\ClientException.cs" />
+    <Compile Include="Exceptions\HostException.cs" />
+    <Compile Include="Responses\Array.cs" />
+    <Compile Include="Responses\User.cs" />
+    <Compile Include="APIs\SMSUsersAPI.cs" />
+    <Compile Include="APIs\HLRAPI.cs" />
+    <Compile Include="APIs\PhonebookFactory.cs" />
+    <Compile Include="Responses\CheckNumber.cs" />
+    <Compile Include="Responses\Contact.cs" />
+    <Compile Include="Responses\Contacts.cs" />
+    <Compile Include="Responses\Points.cs" />
+    <Compile Include="Responses\Groups.cs" />
+    <Compile Include="Responses\Error.cs" />
+    <Compile Include="Responses\Group.cs" />
+    <Compile Include="Responses\Countable.cs" />
+    <Compile Include="Responses\Sender.cs" />
+    <Compile Include="Responses\Senders.cs" />
+    <Compile Include="Responses\NumberStatus.cs" />
+    <Compile Include="APIs\SMSSenderAPI.cs" />
+    <Compile Include="Credentials.cs" />
+    <Compile Include="APIs\ABaseAPI.cs" />
+    <Compile Include="Exceptions\ActionException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestMethods.cs" />
+    <Compile Include="Exceptions\HTTPClientException.cs" />
+    <Compile Include="HTTPClient.cs" />
+    <Compile Include="Responses\Base.cs" />
+    <Compile Include="Responses\MessageStatus.cs" />
+    <Compile Include="Responses\Status.cs" />
+    <Compile Include="APIs\SMSAPI.cs" />
+    <Compile Include="Exceptions\SMSAPIException.cs" />
+    <Compile Include="APIs\ContactsFactory.cs" />
+    <Compile Include="Actions\Contacts\ListContacts.cs" />
+    <Compile Include="Actions\Contacts\CreateContact.cs" />
+    <Compile Include="Actions\Contacts\DeleteContact.cs" />
+    <Compile Include="Actions\Contacts\GetContact.cs" />
+    <Compile Include="Actions\Contacts\EditContact.cs" />
+    <Compile Include="Actions\Contacts\ListContactGroups.cs" />
+    <Compile Include="Actions\Rest.cs" />
+    <Compile Include="Actions\Contacts\ListGroups.cs" />
+    <Compile Include="Actions\Contacts\CreateGroup.cs" />
+    <Compile Include="Actions\Contacts\DeleteGroup.cs" />
+    <Compile Include="Responses\BasicCollection.cs" />
+    <Compile Include="Actions\Contacts\EditGroup.cs" />
+    <Compile Include="Actions\Contacts\ListGroupPermissions.cs" />
+    <Compile Include="Actions\Contacts\GetGroup.cs" />
+    <Compile Include="Responses\GroupPermission.cs" />
+    <Compile Include="Responses\GroupPermissions.cs" />
+    <Compile Include="Actions\Contacts\CreateGroupPermission.cs" />
+    <Compile Include="Actions\Contacts\ListFields.cs" />
+    <Compile Include="Responses\Fields.cs" />
+    <Compile Include="Responses\Field.cs" />
+    <Compile Include="Actions\Contacts\CreateField.cs" />
+    <Compile Include="Actions\Contacts\DeleteField.cs" />
+    <Compile Include="Actions\Contacts\EditField.cs" />
+    <Compile Include="Responses\FieldOptions.cs" />
+    <Compile Include="Responses\FieldOption.cs" />
+    <Compile Include="Actions\Contacts\ListFieldOptions.cs" />
+    <Compile Include="Actions\Contacts\BindContactToGroup.cs" />
+    <Compile Include="Actions\Contacts\UnbindContactFromGroup.cs" />
+    <Compile Include="Actions\Contacts\GetContactGroup.cs" />
+    <Compile Include="Actions\Contacts\DeleteGroupPermission.cs" />
+    <Compile Include="Actions\Contacts\GetGroupPermission.cs" />
+    <Compile Include="Actions\Contacts\EditGroupPermission.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\Styx\Styx\Styx.csproj">
+      <Project>{AF76ECC0-2CA5-4CFF-9E1E-FF5478C4B6E4}</Project>
+      <Name>Styx</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
