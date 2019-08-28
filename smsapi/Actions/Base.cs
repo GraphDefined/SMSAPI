@@ -1,25 +1,25 @@
-﻿using System.IO;
-using System.Runtime.Serialization.Json;
-using System.Collections.Specialized;
-using System.Collections.Generic;
-using System;
+﻿using System;
+using System.IO;
 using System.Text;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Runtime.Serialization.Json;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
 
     public abstract class Base<T, TResult>
     {
 
-        protected Credentials Credentials   { get; }
-        protected HTTPClient  HTTPClient    { get; }
+        protected Credentials   Credentials     { get; }
+        protected SMSAPIClient  SMSAPIClient    { get; }
 
-        public Base(Credentials Credentials,
-                    HTTPClient  HTTPClient)
+        public Base(Credentials   Credentials,
+                    SMSAPIClient  SMSAPIClient)
         {
 
-            this.Credentials = Credentials;
-            this.HTTPClient  = HTTPClient;
+            this.Credentials   = Credentials;
+            this.SMSAPIClient  = SMSAPIClient;
 
         }
 
@@ -27,23 +27,24 @@ namespace SMSApi.Api.Action
         abstract protected String              Uri      { get; }
         abstract protected NameValueCollection Values();
 
-        protected virtual RequestMethods Method => RequestMethods.POST;
+        protected virtual RequestMethods Method
+            => RequestMethods.POST;
 
-        protected TT ResponseToObject<TT>(Stream data)
+        protected TT ResponseToObject<TT>(Stream resultStream)
         {
 
             TT result;
 
-            var uu = (data as MemoryStream).ToArray();
+            var uu = (resultStream as MemoryStream).ToArray();
             var aa = Encoding.UTF8.GetString(uu, 0, uu.Length);
 
 
-            if (data.Length > 0)
+            if (resultStream.Length > 0)
             {
-                data.Position = 0;
+                resultStream.Position = 0;
                 var serializer = new DataContractJsonSerializer(typeof(TT));
-                result = (TT) serializer.ReadObject(data);
-                data.Position = 0;
+                result = (TT) serializer.ReadObject(resultStream);
+                resultStream.Position = 0;
             }
 
             else
@@ -53,7 +54,8 @@ namespace SMSApi.Api.Action
 
         }
 
-        protected virtual void Validate() { }
+        protected virtual void Validate()
+        { }
 
         protected virtual Dictionary<String, Stream> Files()
             => null;
@@ -70,16 +72,16 @@ namespace SMSApi.Api.Action
 
             Validate();
 
-            Stream data = HTTPClient.Execute(Uri, Values(), Files(), Method);
+            var resultStream = SMSAPIClient.Execute(Uri, Values(), Files(), Method).Result;
 
             var result = default(TResult);
 
-            HandleError(data);
+            HandleError(resultStream);
 
             try
             {
-                T response = ResponseToObject<T>(data);
-                result = ConvertResponse(response);
+                T response = ResponseToObject<T>(resultStream);
+                result     = ConvertResponse(response);
             }
             catch (System.Runtime.Serialization.SerializationException e)
             {
@@ -87,27 +89,29 @@ namespace SMSApi.Api.Action
                 throw new HostException(e.Message + " /" + Uri, HostException.E_JSON_DECODE);
             }
 
-            data.Close();
+            resultStream.Close();
 
             return result;
 
         }
 
-        protected void HandleError(Stream data) {
+        protected void HandleError(Stream resultStream)
+        {
 
-            data.Position = 0;
+            resultStream.Position = 0;
 
             try
             {
-                var error = ResponseToObject<Response.Error>(data);
+
+                var error = ResponseToObject<Response.Error>(resultStream);
 
                 if (error.Code != 0)
                 {
-                    if (isHostError(error.Code))
+                    if (IsHostError(error.Code))
                     {
                         throw new HostException(error.Message, error.Code);
                     }
-                    if (isClientError(error.Code))
+                    if (IsClientError(error.Code))
                     {
                         throw new ClientException(error.Message, error.Code);
                     }
@@ -116,10 +120,13 @@ namespace SMSApi.Api.Action
                         throw new ActionException(error.Message, error.Code);
                     }
                 }
-            }
-            catch (System.Runtime.Serialization.SerializationException) { }
 
-            data.Position = 0;
+            }
+            catch (System.Runtime.Serialization.SerializationException)
+            { }
+
+            resultStream.Position = 0;
+
         }
 
         /**
@@ -131,8 +138,9 @@ namespace SMSApi.Api.Action
          * 1000 Akcja dostępna tylko dla użytkownika głównego
          * 1001 Nieprawidłowa akcja
          */
-        private bool isClientError(int code)
+        private Boolean IsClientError(int code)
         {
+
             if (code ==  101) return true;
             if (code ==  102) return true;
             if (code ==  103) return true;
@@ -142,6 +150,7 @@ namespace SMSApi.Api.Action
             if (code == 1001) return true;
 
             return false;
+
         }
 
         /**
@@ -150,14 +159,16 @@ namespace SMSApi.Api.Action
          * 999 Wewnętrzny błąd systemu
          * 201 Wewnętrzny błąd systemu
          */
-        private bool isHostError(int code)
+        private Boolean IsHostError(int code)
         {
+
             if (code ==   8) return true;
             if (code == 201) return true;
             if (code == 666) return true;
             if (code == 999) return true;
 
             return false;
+
         }
 
     }

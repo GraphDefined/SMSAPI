@@ -13,7 +13,7 @@ using System.Collections.Specialized;
  * active Aktywowanie konta podużytkownika (dostępne wartości: 1 – aktywne, 0 – nieaktywne, domyślnie wartość równa 0)
  * info Dodatkowy opis podużytkownika
  */
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
     public class UserAdd : BaseSimple<Response.User>
     {
@@ -21,7 +21,7 @@ namespace SMSApi.Api.Action
         protected String newUsername { get; }
 
         public UserAdd(Credentials  Client,
-                       HTTPClient  Proxy,
+                       SMSAPIClient  Proxy,
                        String  Username)
 
             : base(Client, Proxy)

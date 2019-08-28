@@ -1,18 +1,43 @@
-﻿using System;
+﻿using org.GraphDefined.Vanaheimr.Hermod;
+using org.GraphDefined.Vanaheimr.Hermod.HTTP;
+using System;
 
-namespace SMSApi.Api
+namespace com.GraphDefined.SMSApi.API
 {
     [Obsolete("use ContactsFactory instead")]
-    public class PhonebookFactory : ABaseAPI
+    public class PhonebookFactory : SMSAPIClient
     {
 
-        public PhonebookFactory() : base() { }
-        public PhonebookFactory(Credentials Credentials) : base(Credentials) { }
-        public PhonebookFactory(Credentials Credentials, HTTPClient proxy) : base(Credentials, proxy) { }
+        #region Constructor(s)
+
+        /// <summary>
+        /// Create a new PhonebookFactory HTTP client.
+        /// </summary>
+        /// <param name="Hostname">The remote hostname.</param>
+        /// <param name="RemotePort">The remote HTTPS port.</param>
+        /// <param name="URLPathPrefix">The common URL prefix.</param>
+        /// <param name="BasicAuthentication">An optional HTTP basic authentication.</param>
+        /// <param name="Credentials">The default API authentication.</param>
+        public PhonebookFactory(HTTPHostname? Hostname             = null,
+                                IPPort?       RemotePort           = null,
+                                HTTPPath?     URLPathPrefix        = null,
+                                Credentials   BasicAuthentication  = null,
+                                Credentials   Credentials          = null)
+
+            : base(Hostname,
+                   RemotePort,
+                   URLPathPrefix,
+                   BasicAuthentication,
+                   Credentials)
+
+        { }
+
+        #endregion
+
 
         public Action.PhonebookContactAdd ActionContactAdd(string number = null)
         {
-            var action = new Action.PhonebookContactAdd(Credentials, HTTPClient);
+            var action = new Action.PhonebookContactAdd(Credentials, this);
             action.SetNumber(number);
 
             return action;
@@ -20,7 +45,7 @@ namespace SMSApi.Api
 
         public Action.PhonebookContactGet ActionContactGet(string number = null)
         {
-            var action = new Action.PhonebookContactGet(Credentials, HTTPClient);
+            var action = new Action.PhonebookContactGet(Credentials, this);
             action.Number(number);
 
             return action;
@@ -28,7 +53,7 @@ namespace SMSApi.Api
 
         public Action.PhonebookContactEdit ActionContactEdit(string number = null)
         {
-            var action = new Action.PhonebookContactEdit(Credentials, HTTPClient);
+            var action = new Action.PhonebookContactEdit(Credentials, this);
             action.Number(number);
 
             return action;
@@ -36,18 +61,18 @@ namespace SMSApi.Api
 
         public Action.PhonebookContactDelete ActionContactDelete(string number = null)
         {
-            var action = new Action.PhonebookContactDelete(Credentials, HTTPClient);
+            var action = new Action.PhonebookContactDelete(Credentials, this);
             action.Number(number);
 
             return action;
         }
 
         public Action.PhonebookContactList ActionContactList()
-            => new Action.PhonebookContactList(Credentials, HTTPClient);
+            => new Action.PhonebookContactList(Credentials, this);
 
         public Action.PhonebookGroupAdd ActionGroupAdd(string name = null)
         {
-            var action = new Action.PhonebookGroupAdd(Credentials, HTTPClient);
+            var action = new Action.PhonebookGroupAdd(Credentials, this);
             action.SetName(name);
 
             return action;
@@ -55,7 +80,7 @@ namespace SMSApi.Api
 
         public Action.PhonebookGroupEdit ActionGroupEdit(string name = null)
         {
-            var action = new Action.PhonebookGroupEdit(Credentials, HTTPClient);
+            var action = new Action.PhonebookGroupEdit(Credentials, this);
             action.Name(name);
 
             return action;
@@ -63,7 +88,7 @@ namespace SMSApi.Api
 
         public Action.PhonebookGroupGet ActionGroupGet(string name = null)
         {
-            var action = new Action.PhonebookGroupGet(Credentials, HTTPClient);
+            var action = new Action.PhonebookGroupGet(Credentials, this);
             action.Name(name);
 
             return action;
@@ -71,14 +96,14 @@ namespace SMSApi.Api
 
         public Action.PhonebookGroupDelete ActionGroupDelete(string name = null)
         {
-            var action = new Action.PhonebookGroupDelete(Credentials, HTTPClient);
+            var action = new Action.PhonebookGroupDelete(Credentials, this);
             action.Name(name);
 
             return action;
         }
 
         public Action.PhonebookGroupList ActionGroupList()
-            => new Action.PhonebookGroupList(Credentials, HTTPClient);
+            => new Action.PhonebookGroupList(Credentials, this);
 
     }
 

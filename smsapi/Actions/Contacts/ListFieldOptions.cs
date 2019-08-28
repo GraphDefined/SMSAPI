@@ -1,12 +1,12 @@
 using System;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
     public class ListFieldOptions : Rest<Response.FieldOptions>
     {
 
         public ListFieldOptions(Credentials Client,
-                                HTTPClient  Proxy,
+                                SMSAPIClient  Proxy,
                                 String fieldId)
             : base(Client, Proxy)
         {

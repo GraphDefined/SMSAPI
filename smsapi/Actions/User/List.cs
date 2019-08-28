@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
 
     public class UserList : BaseArray<Response.User>
@@ -10,7 +10,7 @@ namespace SMSApi.Api.Action
         protected String Username { get; }
 
         public UserList(Credentials  Credentials,
-                        HTTPClient   HTTPClient,
+                        SMSAPIClient   HTTPClient,
                         String       Username = null)
 
             : base(Credentials, HTTPClient)

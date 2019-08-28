@@ -1,12 +1,12 @@
 using System;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
     public class GetContact : Rest<Response.Contact>
     {
 
         public GetContact(Credentials  Client,
-                          HTTPClient   Proxy,
+                          SMSAPIClient   Proxy,
                           String  contactId)
             : base(Client, Proxy)
         {

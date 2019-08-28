@@ -1,12 +1,12 @@
 using System;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
     public class ListContactGroups : Rest<Response.Groups>
     {
 
         public ListContactGroups(Credentials Client,
-                                 HTTPClient  Proxy,
+                                 SMSAPIClient  Proxy,
                                  String contactId)
             : base(Client, Proxy)
         {

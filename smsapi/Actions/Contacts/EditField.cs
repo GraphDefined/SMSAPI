@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Specialized;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
     public class EditField : Rest<Response.Field>
     {
         public EditField(Credentials Client,
-                         HTTPClient  Proxy,
+                         SMSAPIClient  Proxy,
                          String fieldId)
             : base(Client, Proxy)
         {

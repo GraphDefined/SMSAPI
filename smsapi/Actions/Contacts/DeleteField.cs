@@ -1,12 +1,12 @@
 using System;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
     public class DeleteField : Rest<Response.Base>
     {
 
         public DeleteField(Credentials Client,
-                           HTTPClient  Proxy,
+                           SMSAPIClient  Proxy,
                            String fieldId)
             : base(Client, Proxy)
         {

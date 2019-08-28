@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Specialized;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
 
     public class DeleteGroup : Rest<Response.Base>
     {
 
         public DeleteGroup(Credentials Client,
-                           HTTPClient  Proxy,
+                           SMSAPIClient  Proxy,
                            String groupId)
             : base(Client, Proxy)
         {

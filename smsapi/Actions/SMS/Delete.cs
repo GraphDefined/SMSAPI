@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Specialized;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
 
     public class SMSDelete : BaseSimple<Response.Countable>
     {
 
         public SMSDelete(Credentials  Client,
-                         HTTPClient  Proxy,
+                         SMSAPIClient  Proxy,
                          String  Id)
 
             : base(Client, Proxy)

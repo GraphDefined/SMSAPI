@@ -1,13 +1,13 @@
-﻿namespace SMSApi.Api.Action
+﻿namespace com.GraphDefined.SMSApi.API.Action
 {
 
     public abstract class BaseSimple<T> : Base<T, T>
     {
 
-        public BaseSimple(Credentials Client,
-                          HTTPClient  Proxy)
+        public BaseSimple(Credentials   Credentials,
+                          SMSAPIClient  SMSAPIClient)
 
-            : base(Client, Proxy)
+            : base(Credentials, SMSAPIClient)
 
         { }
 

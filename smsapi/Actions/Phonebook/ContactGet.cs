@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Specialized;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
     public class PhonebookContactGet : BaseSimple<Response.Contact>
     {
 
         public PhonebookContactGet(Credentials Client,
-                                   HTTPClient  Proxy)
+                                   SMSAPIClient  Proxy)
 
             : base(Client, Proxy)
 

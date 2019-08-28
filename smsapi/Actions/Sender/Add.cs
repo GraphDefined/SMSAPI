@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Specialized;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
 
     public class SenderAdd : BaseSimple<Response.Base>
     {
 
         public SenderAdd(Credentials   Client,
-                         HTTPClient  Proxy,
+                         SMSAPIClient  Proxy,
                          String      Name)
             : base(Client, Proxy)
         {

@@ -1,11 +1,11 @@
 using System;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
     public class DeleteGroupPermission : Rest<Response.GroupPermission>
     {
         public DeleteGroupPermission(Credentials Client,
-                                     HTTPClient  Proxy,
+                                     SMSAPIClient  Proxy,
                                      String groupId,
                                      String username)
             : base(Client, Proxy)

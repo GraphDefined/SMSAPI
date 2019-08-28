@@ -1,24 +1,42 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
 
     public class SMSSend : Send
     {
 
+        protected String Text { get; }
+
+        private string   DateExpire;
+        private string   Sender;
+        private bool     Single = false;
+        private bool     NoUnicode = false;
+        private string   DataCoding;
+        private string   udh;
+        private bool     Flash = false;
+        private string   Encoding = "UTF-8";
+        private bool     Fast = false;
+        private bool     Normalize = false;
+        private int      MaxParts = 0;
+        private string[] Params = null;
+        private bool     Details = true;
+
         public SMSSend(Credentials          Credentials,
-                       HTTPClient           HTTPClient,
+                       SMSAPIClient         SMSAPIClient,
                        IEnumerable<String>  Recipients,
                        String               SMSText)
 
-            : base(Credentials, HTTPClient)
+            : base(Credentials, SMSAPIClient)
 
         {
+
             this.To    = Recipients;
             this.Text  = SMSText;
+
         }
 
         protected override String Uri => "sms.do";
@@ -43,10 +61,10 @@ namespace SMSApi.Api.Action
 
             collection.Add("message", Text);
 
-            collection.Add("single",    (Single    ? "1" : "0") );
-            collection.Add("nounicode", (NoUnicode ? "1" : "0") );
-            collection.Add("flash",     (Flash     ? "1" : "0") );
-            collection.Add("fast",      (Fast      ? "1" : "0") );
+            collection.Add("single",    Single    ? "1" : "0");
+            collection.Add("nounicode", NoUnicode ? "1" : "0");
+            collection.Add("flash",     Flash     ? "1" : "0");
+            collection.Add("fast",      Fast      ? "1" : "0");
 
             if (DataCoding != null)
                 collection.Add("datacoding", DataCoding);
@@ -78,22 +96,21 @@ namespace SMSApi.Api.Action
             }
 
             if (Details == true)
-            {
                 collection.Add("details", "1");
-            }
 
-            if (this.Params != null)
+            if (Params != null)
             {
-                for (int i = 0; i < this.Params.Length; i++)
+                for (int i = 0; i < Params.Length; i++)
                 {
-                    if (this.Params[i] != null)
+                    if (Params[i] != null)
                     {
-                        collection.Add("param" + ((i + 1).ToString()), this.Params[i]);
+                        collection.Add("param" + (i + 1).ToString(), Params[i]);
                     }
                 }
             }
 
             return collection;
+
         }
 
         protected override void Validate()
@@ -107,21 +124,7 @@ namespace SMSApi.Api.Action
 
         }
 
-        protected String Text { get; }
 
-        private string DateExpire;
-        private string Sender;
-        private bool Single = false;
-        private bool NoUnicode = false;
-        private string DataCoding;
-        private string udh;
-        private bool Flash = false;
-        private string Encoding = "UTF-8";
-        private bool Fast = false;
-        private bool Normalize = false;
-        private int MaxParts = 0;
-        private string[] Params = null;
-        private bool Details = true;
 
         //public SMSSend SetTo(string to)
         //{

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Specialized;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
     public class SenderDelete : BaseSimple<Response.Base>
     {
 
         public SenderDelete(Credentials   Client,
-                            HTTPClient  Proxy,
+                            SMSAPIClient  Proxy,
                             String      Name)
             : base(Client, Proxy)
         {

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace SMSApi.Api.Response
+namespace com.GraphDefined.SMSApi.API.Response
 {
     [DataContract]
     public class Array<T> : Countable

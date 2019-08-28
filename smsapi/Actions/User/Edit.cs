@@ -13,7 +13,7 @@ using System.Collections.Specialized;
  * active Aktywowanie konta podużytkownika (dostępne wartości: 1 – aktywne, 0 – nieaktywne, domyślnie wartość równa 0)
  * info Dodatkowy opis podużytkownika
  */
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
 
     public class UserEdit : BaseSimple<Response.User>
@@ -41,7 +41,7 @@ namespace SMSApi.Api.Action
         protected Boolean WithoutPrefix   { get; set; }
 
         public UserEdit(Credentials  Credentials,
-                        HTTPClient   HTTPClient,
+                        SMSAPIClient   HTTPClient,
                         String       Username)
 
             : base(Credentials, HTTPClient)

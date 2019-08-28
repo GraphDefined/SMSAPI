@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
 
     public abstract class BaseArray<T> : Base<List<T>, Response.Array<T>>
     {
 
         public BaseArray(Credentials Client,
-                         HTTPClient  Proxy)
+                         SMSAPIClient  Proxy)
 
             : base(Client, Proxy)
 

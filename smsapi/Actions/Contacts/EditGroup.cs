@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Specialized;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
     public class EditGroup : Rest<Response.Group>
     {
 
         public EditGroup(Credentials Client,
-                         HTTPClient  Proxy,
+                         SMSAPIClient  Proxy,
                          String groupId)
             : base(Client, Proxy)
         {

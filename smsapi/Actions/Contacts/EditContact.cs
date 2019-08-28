@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Specialized;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
     public class EditContact : Rest<Response.Contact>
     {
 
         public EditContact(Credentials Client,
-                           HTTPClient  Proxy,
+                           SMSAPIClient  Proxy,
                            String contactId)
 
             : base(Client, Proxy)

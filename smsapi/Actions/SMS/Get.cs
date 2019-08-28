@@ -2,30 +2,30 @@
 using System.Collections.Specialized;
 using System.Collections.Generic;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
 
-    public class SMSGet : BaseSimple<Response.Status>
+    public class SMSGet : BaseSimple<Response.SMSAPIResponseStatus>
     {
 
         protected IEnumerable<String> Ids   { get; }
 
 
-        public SMSGet(Credentials  Credentials,
-                      HTTPClient   Proxy,
-                      String       Id)
+        public SMSGet(Credentials   Credentials,
+                      SMSAPIClient  SMSAPIClient,
+                      String        Id)
 
-            : base(Credentials, Proxy)
+            : base(Credentials, SMSAPIClient)
 
         {
             this.Ids = new String[] { Id };
         }
 
         public SMSGet(Credentials          Credentials,
-                      HTTPClient           Proxy,
+                      SMSAPIClient         SMSAPIClient,
                       IEnumerable<String>  Ids)
 
-            : base(Credentials, Proxy)
+            : base(Credentials, SMSAPIClient)
 
         {
             this.Ids = Ids;

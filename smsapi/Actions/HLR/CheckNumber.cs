@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
 
     public class HLRCheckNumber : BaseSimple<Response.CheckNumber>
@@ -12,7 +12,7 @@ namespace SMSApi.Api.Action
 
 
         public HLRCheckNumber(Credentials Client,
-                              HTTPClient  Proxy,
+                              SMSAPIClient  Proxy,
                               String      Number)
 
             : base(Client, Proxy)
@@ -22,7 +22,7 @@ namespace SMSApi.Api.Action
         }
 
         public HLRCheckNumber(Credentials          Client,
-                              HTTPClient           Proxy,
+                              SMSAPIClient           Proxy,
                               IEnumerable<String>  Numbers)
 
             : base(Client, Proxy)

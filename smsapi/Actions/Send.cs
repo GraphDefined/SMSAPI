@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
 
-    public abstract class Send : BaseSimple<Response.Status>
+    public abstract class Send : BaseSimple<Response.SMSAPIResponseStatus>
     {
-
-        protected Send(Credentials Client,
-                       HTTPClient Proxy)
-
-            : base(Client, Proxy)
-
-        { }
 
         protected IEnumerable<String>  To;
         protected String               Group;
@@ -21,6 +14,13 @@ namespace SMSApi.Api.Action
         protected Boolean              IdxCheck = false;
         protected String               Partner;
         protected Boolean              Test     = false;
+
+        protected Send(Credentials   Credentials,
+                       SMSAPIClient  SMSAPIClient)
+
+            : base(Credentials, SMSAPIClient)
+
+        { }
 
     }
 

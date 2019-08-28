@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Specialized;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
     public class CreateField : Rest<Response.Field>
     {
 
         public CreateField(Credentials Client,
-                           HTTPClient  Proxy)
+                           SMSAPIClient  Proxy)
 
             : base(Client, Proxy)
 

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Specialized;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
+
     public class PhonebookContactDelete : BaseSimple<Response.Base>
     {
 
         public PhonebookContactDelete(Credentials Client,
-                                      HTTPClient Proxy)
+                                      SMSAPIClient Proxy)
 
             : base(Client, Proxy)
 
@@ -19,16 +20,20 @@ namespace SMSApi.Api.Action
 
         protected override NameValueCollection Values()
         {
-            var collection = new NameValueCollection();
 
-            collection.Add("format", "json");
+            var collection = new NameValueCollection {
 
-            collection.Add("username", Credentials.Username);
-            collection.Add("password", Credentials.Password);
+                { "format",         "json" },
 
-            collection.Add("delete_contact", number);
+                { "username",       Credentials.Username },
+                { "password",       Credentials.Password },
+
+                { "delete_contact", number }
+
+            };
 
             return collection;
+
         }
 
         public PhonebookContactDelete Number(string number)
@@ -38,4 +43,5 @@ namespace SMSApi.Api.Action
         }
 
     }
+
 }

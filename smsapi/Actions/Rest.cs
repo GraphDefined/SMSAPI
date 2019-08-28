@@ -2,14 +2,14 @@ using System;
 using System.Collections.Specialized;
 using System.Web;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
 
     public abstract class Rest<T> : BaseSimple<T>
     {
 
         public Rest(Credentials Client,
-                    HTTPClient  Proxy)
+                    SMSAPIClient  Proxy)
 
             : base(Client, Proxy)
 

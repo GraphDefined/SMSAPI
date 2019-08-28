@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Specialized;
 
-namespace SMSApi.Api.Action
+namespace com.GraphDefined.SMSApi.API.Action
 {
     public class SenderSetDefault : BaseSimple<Response.Base>
     {
 
         public SenderSetDefault(Credentials   Client,
-                                HTTPClient  Proxy,
+                                SMSAPIClient  Proxy,
                                 String      DefaultName)
             : base(Client, Proxy)
         {

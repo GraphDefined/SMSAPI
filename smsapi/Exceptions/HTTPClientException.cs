@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SMSApi.Api
+namespace com.GraphDefined.SMSApi.API
 {
 
     public class HTTPClientException : Exception
