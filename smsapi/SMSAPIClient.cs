@@ -454,7 +454,7 @@ namespace com.GraphDefined.SMSApi.API
 
                 var boundary = "SMSAPI-" + DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss") + new Random().Next(int.MinValue, int.MaxValue).ToString() + "-boundary";
 
-                var webRequest = WebRequest.Create("https://" + Hostname.ToString() + (RemotePort != IPPort.HTTPS ? ":" + RemotePort : "") + URLPathPrefix + Command);
+                var webRequest = WebRequest.Create("https://" + Hostname.ToString() + (RemotePort != IPPort.HTTPS ? ":" + RemotePort : "") + URLPathPrefix.ToString() + Command);
                 webRequest.Method = HTTPMethod.RequestMethodToString();
 
                 if (BasicAuthentication != null)
