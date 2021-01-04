@@ -71,7 +71,7 @@ namespace com.GraphDefined.SMSApi.API
         /// Create a new credential based on the given username and password.
         /// </summary>
         /// <param name="Username">The username.</param>
-        /// <param name="PasswordHash">The password.</param>
+        /// <param name="Password">The password.</param>
         public static Credentials Create(String  Username,
                                          String  Password)
         {
