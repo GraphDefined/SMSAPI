@@ -1,6 +1,8 @@
-﻿using org.GraphDefined.Vanaheimr.Hermod;
+﻿using System;
+using System.Net.Security;
+
+using org.GraphDefined.Vanaheimr.Hermod.DNS;
 using org.GraphDefined.Vanaheimr.Hermod.HTTP;
-using System;
 
 namespace com.GraphDefined.SMSApi.API
 {
@@ -13,22 +15,40 @@ namespace com.GraphDefined.SMSApi.API
         /// <summary>
         /// Create a new PhonebookFactory HTTP client.
         /// </summary>
-        /// <param name="Hostname">The remote hostname.</param>
-        /// <param name="RemotePort">The remote HTTPS port.</param>
-        /// <param name="URLPathPrefix">The common URL prefix.</param>
+        /// <param name="RemoteURL">The remote URL of the OICP HTTP endpoint to connect to.</param>
+        /// <param name="VirtualHostname">An optional HTTP virtual hostname.</param>
+        /// <param name="Description">An optional description of this CPO client.</param>
+        /// <param name="RemoteCertificateValidator">The remote SSL/TLS certificate validator.</param>
+        /// <param name="HTTPUserAgent">The HTTP user agent identification.</param>
         /// <param name="BasicAuthentication">An optional HTTP basic authentication.</param>
         /// <param name="Credentials">The default API authentication.</param>
-        public PhonebookFactory(HTTPHostname? Hostname             = null,
-                                IPPort?       RemotePort           = null,
-                                HTTPPath?     URLPathPrefix        = null,
-                                Credentials   BasicAuthentication  = null,
-                                Credentials   Credentials          = null)
+        /// <param name="RequestTimeout">An optional request timeout.</param>
+        /// <param name="TransmissionRetryDelay">The delay between transmission retries.</param>
+        /// <param name="MaxNumberOfRetries">The maximum number of transmission retries for HTTP request.</param>
+        /// <param name="DNSClient">The DNS client to use.</param>
+        public PhonebookFactory(URL?                                 RemoteURL                    = null,
+                                HTTPHostname?                        VirtualHostname              = null,
+                                String                               Description                  = null,
+                                RemoteCertificateValidationCallback  RemoteCertificateValidator   = null,
+                                String                               HTTPUserAgent                = DefaultHTTPUserAgent,
+                                Credentials                          BasicAuthentication          = null,
+                                Credentials                          Credentials                  = null,
+                                TimeSpan?                            RequestTimeout               = null,
+                                TransmissionRetryDelayDelegate       TransmissionRetryDelay       = null,
+                                UInt16?                              MaxNumberOfRetries           = DefaultMaxNumberOfRetries,
+                                DNSClient                            DNSClient                    = null)
 
-            : base(Hostname,
-                   RemotePort,
-                   URLPathPrefix,
+            : base(RemoteURL,
+                   VirtualHostname,
+                   Description,
+                   RemoteCertificateValidator,
+                   HTTPUserAgent,
                    BasicAuthentication,
-                   Credentials)
+                   Credentials,
+                   RequestTimeout,
+                   TransmissionRetryDelay,
+                   MaxNumberOfRetries,
+                   DNSClient)
 
         { }
 

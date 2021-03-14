@@ -44,89 +44,29 @@ namespace com.GraphDefined.SMSApi.API
     /// <summary>
     /// A SMSAPI HTTP client.
     /// </summary>
-    public class SMSAPIClient : IHTTPClient
+    public class SMSAPIClient : AHTTPClient
     {
 
         #region Data
 
         /// <summary>
-        /// The default remote hostname.
-        /// </summary>
-        public static readonly HTTPHostname  DefaultHostname        = HTTPHostname.Parse("api.smsapi.com");
-
-        /// <summary>
-        /// The default HTTP port.
-        /// </summary>
-        public static readonly IPPort        DefaultRemotePort      = IPPort.HTTPS;
-
-        /// <summary>
-        /// The default HTTP port.
-        /// </summary>
-        public static readonly HTTPPath      DefaultURLPrefix       = HTTPPath.Parse("/api/");
-
-        /// <summary>
         /// The default HTTP user agent.
         /// </summary>
-        public const           String        DefaultUserAgent       = "GraphDefined Asavie API Client v0.1";
-
-        /// <summary>
-        /// The default request timeout.
-        /// </summary>
-        public static readonly TimeSpan      DefaultRequestTimeout  = TimeSpan.FromSeconds(180);
+        public new const String  DefaultHTTPUserAgent  = "GraphDefined Asavie API Client v0.2";
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// The remote hostname.
-        /// </summary>
-        public HTTPHostname                         Hostname                      { get; }
-
-        /// <summary>
-        /// The remote virtual hostname.
-        /// </summary>
-        public HTTPHostname?                        VirtualHostname               { get; }
-
-        /// <summary>
-        /// The remote HTTPS port.
-        /// </summary>
-        public IPPort                               RemotePort                    { get; }
-
-        /// <summary>
-        /// The remote SSL/TLS certificate validator.
-        /// </summary>
-        public RemoteCertificateValidationCallback  RemoteCertificateValidator    { get; }
-
-        /// <summary>
-        /// The URL path prefix.
-        /// </summary>
-        public HTTPPath                             URLPathPrefix                 { get; }
-
-        /// <summary>
         /// API authentication (send within the payload).
         /// </summary>
-        public Credentials                          Credentials                   { get; }
+        public Credentials  Credentials            { get; }
 
         /// <summary>
         /// API credentials for HTTP basic authentication.
         /// </summary>
-        public Credentials                          BasicAuthentication           { get; }
-
-        /// <summary>
-        /// The HTTP user agent.
-        /// </summary>
-        public String                               UserAgent                     { get; }
-
-        /// <summary>
-        /// The request timeout.
-        /// </summary>
-        public TimeSpan?                            RequestTimeout                { get; }
-
-        /// <summary>
-        /// The DNS client to use.
-        /// </summary>
-        public DNSClient                            DNSClient                     { get; }
+        public Credentials  BasicAuthentication    { get; }
 
         #endregion
 
@@ -160,21 +100,45 @@ namespace com.GraphDefined.SMSApi.API
         /// <summary>
         /// Create a new SMSAPI HTTP client.
         /// </summary>
-        /// <param name="Hostname">The remote hostname.</param>
-        /// <param name="RemotePort">The remote HTTPS port.</param>
-        /// <param name="URLPathPrefix">The common URL prefix.</param>
+        /// <param name="RemoteURL">The remote URL of the OICP HTTP endpoint to connect to.</param>
+        /// <param name="VirtualHostname">An optional HTTP virtual hostname.</param>
+        /// <param name="Description">An optional description of this CPO client.</param>
+        /// <param name="RemoteCertificateValidator">The remote SSL/TLS certificate validator.</param>
+        /// <param name="HTTPUserAgent">The HTTP user agent identification.</param>
         /// <param name="BasicAuthentication">An optional HTTP basic authentication.</param>
         /// <param name="Credentials">The default API authentication.</param>
-        public SMSAPIClient(HTTPHostname? Hostname             = null,
-                            IPPort?       RemotePort           = null,
-                            HTTPPath?     URLPathPrefix        = null,
-                            Credentials   BasicAuthentication  = null,
-                            Credentials   Credentials          = null)
+        /// <param name="RequestTimeout">An optional request timeout.</param>
+        /// <param name="TransmissionRetryDelay">The delay between transmission retries.</param>
+        /// <param name="MaxNumberOfRetries">The maximum number of transmission retries for HTTP request.</param>
+        /// <param name="DNSClient">The DNS client to use.</param>
+        public SMSAPIClient(URL?                                 RemoteURL                    = null,
+                            HTTPHostname?                        VirtualHostname              = null,
+                            String                               Description                  = null,
+                            RemoteCertificateValidationCallback  RemoteCertificateValidator   = null,
+                            String                               HTTPUserAgent                = DefaultHTTPUserAgent,
+                            Credentials                          BasicAuthentication          = null,
+                            Credentials                          Credentials                  = null,
+                            TimeSpan?                            RequestTimeout               = null,
+                            TransmissionRetryDelayDelegate       TransmissionRetryDelay       = null,
+                            UInt16?                              MaxNumberOfRetries           = DefaultMaxNumberOfRetries,
+                            DNSClient                            DNSClient                    = null)
+
+            : base(RemoteURL          ?? URL.Parse("https://api.smsapi.com/api/"),
+                   VirtualHostname,
+                   Description,
+                   RemoteCertificateValidator,
+                   null,
+                   null,
+                   HTTPUserAgent      ?? DefaultHTTPUserAgent,
+                   RequestTimeout,
+                   TransmissionRetryDelay,
+                   MaxNumberOfRetries ?? DefaultMaxNumberOfRetries,
+                   false,
+                   null,
+                   DNSClient)
+
         {
 
-            this.Hostname             = Hostname      ?? HTTPHostname.Parse("api.smsapi.com");
-            this.RemotePort           = RemotePort    ?? IPPort.HTTPS;
-            this.URLPathPrefix        = URLPathPrefix ?? HTTPPath.Parse("/api/");
             this.BasicAuthentication  = BasicAuthentication;
             this.Credentials          = Credentials;
 
@@ -454,7 +418,7 @@ namespace com.GraphDefined.SMSApi.API
 
                 var boundary = "SMSAPI-" + DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss") + new Random().Next(int.MinValue, int.MaxValue).ToString() + "-boundary";
 
-                var webRequest = WebRequest.Create("https://" + Hostname.ToString() + (RemotePort != IPPort.HTTPS ? ":" + RemotePort : "") + URLPathPrefix.ToString() + Command);
+                var webRequest = WebRequest.Create(RemoteURL.ToString() + Command);
                 webRequest.Method = HTTPMethod.RequestMethodToString();
 
                 if (BasicAuthentication != null)
