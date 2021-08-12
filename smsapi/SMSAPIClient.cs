@@ -407,7 +407,7 @@ namespace com.GraphDefined.SMSApi.API
             }
             catch (Exception e)
             {
-                e.Log(nameof(SMSAPIClient) + "." + nameof(OnSendSMSAPIRequest));
+                DebugX.Log(e, nameof(SMSAPIClient) + "." + nameof(OnSendSMSAPIRequest));
             }
 
             #endregion
@@ -503,7 +503,7 @@ namespace com.GraphDefined.SMSApi.API
             }
             catch (Exception e)
             {
-                e.Log(nameof(SMSAPIClient) + "." + nameof(OnSendSMSAPIResponse));
+                DebugX.Log(e, nameof(SMSAPIClient) + "." + nameof(OnSendSMSAPIResponse));
             }
 
             #endregion
