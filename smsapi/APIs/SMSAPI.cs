@@ -4,14 +4,41 @@ using System.Collections.Generic;
 
 using org.GraphDefined.Vanaheimr.Hermod.DNS;
 using org.GraphDefined.Vanaheimr.Hermod.HTTP;
+using System.Threading.Tasks;
+using System.IO;
+using System.Collections.Specialized;
 
 namespace com.GraphDefined.SMSApi.API
 {
 
+    public interface ISMSClient
+    {
+
+        event OnSendSMSAPIRequestDelegate   OnSendSMSAPIRequest;
+
+        event OnSendSMSAPIResponseDelegate  OnSendSMSAPIResponse;
+
+
+        Action.SMSSend Send(String text, String   to);
+        Action.SMSSend Send(String text, String[] to);
+
+        Task<Stream> Execute(String               Command,
+                             NameValueCollection  Data,
+                             Stream               File,
+                             RequestMethods       HTTPMethod = RequestMethods.POST);
+
+        Task<Stream> Execute(String                      Command,
+                             NameValueCollection         Data,
+                             Dictionary<String, Stream>  Files       = null,
+                             RequestMethods              HTTPMethod  = RequestMethods.POST);
+
+    }
+
+
     /// <summary>
     /// The SMS API.
     /// </summary>
-    public class SMSAPI : SMSAPIClient
+    public class SMSAPI : SMSAPIClient, ISMSClient
     {
 
         #region Constructor(s)

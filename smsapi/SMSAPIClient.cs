@@ -41,6 +41,23 @@ using Newtonsoft.Json.Linq;
 namespace com.GraphDefined.SMSApi.API
 {
 
+    public delegate Task OnSendSMSAPIRequestDelegate (DateTime                        LogTimestamp,
+                                                      SMSAPIClient                    Sender,
+                                                      EventTracking_Id                EventTrackingId,
+                                                      String                          Command,
+                                                      JObject                         Data,
+                                                      TimeSpan?                       RequestTimeout);
+
+    public delegate Task OnSendSMSAPIResponseDelegate(DateTime                        LogTimestamp,
+                                                      SMSAPIClient                    Sender,
+                                                      EventTracking_Id                EventTrackingId,
+                                                      String                          Command,
+                                                      JObject                         Data,
+                                                      TimeSpan?                       RequestTimeout,
+                                                      SMSAPIResponseStatus            Result,
+                                                      TimeSpan                        Runtime);
+
+
     /// <summary>
     /// A SMSAPI HTTP client.
     /// </summary>
@@ -72,26 +89,9 @@ namespace com.GraphDefined.SMSApi.API
 
         #region Events
 
-        public delegate Task OnSendSMSAPIRequestDelegate (DateTime                        LogTimestamp,
-                                                          SMSAPIClient                    Sender,
-                                                          EventTracking_Id                EventTrackingId,
-                                                          String                          Command,
-                                                          JObject                         Data,
-                                                          TimeSpan?                       RequestTimeout);
+        public event OnSendSMSAPIRequestDelegate   OnSendSMSAPIRequest;
 
-        public event OnSendSMSAPIRequestDelegate OnSendSMSAPIRequest;
-
-
-        public delegate Task OnSendSMSAPIResponseDelegate(DateTime                        LogTimestamp,
-                                                          SMSAPIClient                    Sender,
-                                                          EventTracking_Id                EventTrackingId,
-                                                          String                          Command,
-                                                          JObject                         Data,
-                                                          TimeSpan?                       RequestTimeout,
-                                                          SMSAPIResponseStatus            Result,
-                                                          TimeSpan                        Runtime);
-
-        public event OnSendSMSAPIResponseDelegate OnSendSMSAPIResponse;
+        public event OnSendSMSAPIResponseDelegate  OnSendSMSAPIResponse;
 
         #endregion
 
