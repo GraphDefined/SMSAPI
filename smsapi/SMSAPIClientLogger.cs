@@ -59,13 +59,16 @@ namespace com.GraphDefined.SMSApi.API
         /// Create a new SMSAPI logger using the default logging delegates.
         /// </summary>
         /// <param name="SMSAPIClient">An SMSAPI client.</param>
+        /// <param name="LoggingPath">The logging path.</param>
         /// <param name="Context">A context of this API.</param>
         /// <param name="LogFileCreator">A delegate to create a log file from the given context and log file name.</param>
         public SMSAPIClientLogger(SMSAPIClient            SMSAPIClient,
+                                  String                  LoggingPath,
                                   String                  Context         = DefaultContext,
                                   LogfileCreatorDelegate  LogFileCreator  = null)
 
             : this(SMSAPIClient,
+                   LoggingPath,
                    Context.IsNotNullOrEmpty() ? Context : DefaultContext,
                    null,
                    null,
@@ -84,6 +87,7 @@ namespace com.GraphDefined.SMSApi.API
         /// Create a SMSAPI HTTP logger using the given logging delegates.
         /// </summary>
         /// <param name="SMSAPIClient">An SMSAPI client.</param>
+        /// <param name="LoggingPath">The logging path.</param>
         /// <param name="Context">A context of this API.</param>
         /// 
         /// <param name="LogHTTPRequest_toConsole">A delegate to log incoming HTTP requests to console.</param>
@@ -103,6 +107,7 @@ namespace com.GraphDefined.SMSApi.API
         /// 
         /// <param name="LogFileCreator">A delegate to create a log file from the given context and log file name.</param>
         public SMSAPIClientLogger(SMSAPIClient                SMSAPIClient,
+                                  String                      LoggingPath,
                                   String                      Context,
 
                                   HTTPRequestLoggerDelegate   LogHTTPRequest_toConsole,
@@ -123,6 +128,7 @@ namespace com.GraphDefined.SMSApi.API
                                   LogfileCreatorDelegate      LogFileCreator              = null)
 
             : base(SMSAPIClient,
+                   LoggingPath,
                    Context.IsNotNullOrEmpty() ? Context : DefaultContext,
 
                    LogHTTPRequest_toConsole,
@@ -149,7 +155,6 @@ namespace com.GraphDefined.SMSApi.API
             this.SMSAPIClient = SMSAPIClient ?? throw new ArgumentNullException(nameof(SMSAPIClient), "The given SMSAPI client must not be null!");
 
             #endregion
-
 
             #region SIMHardware
 
