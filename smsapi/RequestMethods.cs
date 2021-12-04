@@ -10,7 +10,7 @@ namespace com.GraphDefined.SMSApi.API
         DELETE
     };
 
-    public static class Extentions
+    public static class Extensions
     {
 
         public static String RequestMethodToString(this RequestMethods method)
