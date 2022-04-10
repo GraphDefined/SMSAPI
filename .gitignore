@@ -3,6 +3,8 @@
 *.suo
 */bin
 */obj
+NET6/*/obj
+NET6/*/bin
 *.csproj.user
 !.gitkeep
 /smsapiTests/App.Config
