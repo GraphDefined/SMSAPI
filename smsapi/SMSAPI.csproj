@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Hermod\NET6\Hermod\Hermod.csproj" />
-    <ProjectReference Include="..\..\..\Styx\NET6\Styx\Styx.csproj" />
+    <ProjectReference Include="..\..\Hermod\Hermod\Hermod.csproj" />
+    <ProjectReference Include="..\..\Styx\Styx\Styx.csproj" />
   </ItemGroup>
 
 </Project>
