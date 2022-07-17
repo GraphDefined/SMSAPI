@@ -1,6 +1,7 @@
 ﻿/*
  * Copyright (c) 2017-2022, Achim Friedland <achim.friedland@graphdefined.com>
  * This file is part of GraphDefined SMSAPI <https://github.com/GraphDefined/SMSAPI>
+ *   based on original work of SMSAPI!
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

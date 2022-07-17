@@ -1,6 +1,7 @@
 ﻿/*
  * Copyright (c) 2017-2022, Achim Friedland <achim.friedland@graphdefined.com>
- * This file is part of GraphDefined AsavieAPI <https://github.com/GraphDefined/SMSAPI>
+ * This file is part of GraphDefined SMSAPI <https://github.com/GraphDefined/SMSAPI>
+ *   based on original work of SMSAPI!
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,23 +19,19 @@
 #region Usings
 
 using System;
-using System.IO;
 using System.Net;
-using System.Linq;
 using System.Net.Security;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+using System.Text;
 using System.Collections.Specialized;
+using System.Runtime.Serialization.Json;
+using System.Security.Authentication;
 
-using org.GraphDefined.Vanaheimr.Hermod;
+using Newtonsoft.Json.Linq;
+
 using org.GraphDefined.Vanaheimr.Hermod.DNS;
 using org.GraphDefined.Vanaheimr.Hermod.HTTP;
 using org.GraphDefined.Vanaheimr.Illias;
-
 using com.GraphDefined.SMSApi.API.Response;
-using System.Runtime.Serialization.Json;
-using System.Text;
-using Newtonsoft.Json.Linq;
 
 #endregion
 
@@ -78,20 +75,20 @@ namespace com.GraphDefined.SMSApi.API
         /// <summary>
         /// API authentication (send within the payload).
         /// </summary>
-        public Credentials  Credentials            { get; }
+        public Credentials?  Credentials            { get; }
 
         /// <summary>
         /// API credentials for HTTP basic authentication.
         /// </summary>
-        public Credentials  BasicAuthentication    { get; }
+        public Credentials?  BasicAuthentication    { get; }
 
         #endregion
 
         #region Events
 
-        public event OnSendSMSAPIRequestDelegate   OnSendSMSAPIRequest;
+        public event OnSendSMSAPIRequestDelegate?   OnSendSMSAPIRequest;
 
-        public event OnSendSMSAPIResponseDelegate  OnSendSMSAPIResponse;
+        public event OnSendSMSAPIResponseDelegate?  OnSendSMSAPIResponse;
 
         #endregion
 
@@ -111,17 +108,19 @@ namespace com.GraphDefined.SMSApi.API
         /// <param name="TransmissionRetryDelay">The delay between transmission retries.</param>
         /// <param name="MaxNumberOfRetries">The maximum number of transmission retries for HTTP request.</param>
         /// <param name="DNSClient">The DNS client to use.</param>
-        public SMSAPIClient(URL?                                 RemoteURL                    = null,
-                            HTTPHostname?                        VirtualHostname              = null,
-                            String                               Description                  = null,
-                            RemoteCertificateValidationCallback  RemoteCertificateValidator   = null,
-                            String                               HTTPUserAgent                = DefaultHTTPUserAgent,
-                            Credentials                          BasicAuthentication          = null,
-                            Credentials                          Credentials                  = null,
-                            TimeSpan?                            RequestTimeout               = null,
-                            TransmissionRetryDelayDelegate       TransmissionRetryDelay       = null,
-                            UInt16?                              MaxNumberOfRetries           = DefaultMaxNumberOfRetries,
-                            DNSClient                            DNSClient                    = null)
+        public SMSAPIClient(URL?                                  RemoteURL                    = null,
+                            HTTPHostname?                         VirtualHostname              = null,
+                            String?                               Description                  = null,
+                            RemoteCertificateValidationCallback?  RemoteCertificateValidator   = null,
+                            SslProtocols?                         TLSProtocol                  = null,
+                            Boolean?                              PreferIPv4                   = null,
+                            String                                HTTPUserAgent                = DefaultHTTPUserAgent,
+                            Credentials?                          BasicAuthentication          = null,
+                            Credentials?                          Credentials                  = null,
+                            TimeSpan?                             RequestTimeout               = null,
+                            TransmissionRetryDelayDelegate?       TransmissionRetryDelay       = null,
+                            UInt16?                               MaxNumberOfRetries           = DefaultMaxNumberOfRetries,
+                            DNSClient?                            DNSClient                    = null)
 
             : base(RemoteURL          ?? URL.Parse("https://api.smsapi.com/api/"),
                    VirtualHostname,
@@ -129,6 +128,8 @@ namespace com.GraphDefined.SMSApi.API
                    RemoteCertificateValidator,
                    null,
                    null,
+                   TLSProtocol,
+                   PreferIPv4,
                    HTTPUserAgent      ?? DefaultHTTPUserAgent,
                    RequestTimeout,
                    TransmissionRetryDelay,
@@ -355,10 +356,10 @@ namespace com.GraphDefined.SMSApi.API
         /// <param name="Data">The data of the SMSAPI command.</param>
         /// <param name="Files">Optional files to send.</param>
         /// <param name="HTTPMethod">The HTTP method to use.</param>
-        public async Task<Stream> Execute(String                      Command,
-                                          NameValueCollection         Data,
-                                          Dictionary<String, Stream>  Files       = null,
-                                          RequestMethods              HTTPMethod  = RequestMethods.POST)
+        public async Task<Stream> Execute(String                       Command,
+                                          NameValueCollection          Data,
+                                          Dictionary<String, Stream>?  Files       = null,
+                                          RequestMethods               HTTPMethod  = RequestMethods.POST)
         {
 
             #region Init
