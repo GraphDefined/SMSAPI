@@ -120,6 +120,7 @@ namespace com.GraphDefined.SMSApi.API
                             TimeSpan?                             RequestTimeout               = null,
                             TransmissionRetryDelayDelegate?       TransmissionRetryDelay       = null,
                             UInt16?                               MaxNumberOfRetries           = DefaultMaxNumberOfRetries,
+                            Boolean?                              DisableLogging               = false,
                             DNSClient?                            DNSClient                    = null)
 
             : base(RemoteURL          ?? URL.Parse("https://api.smsapi.com/api/"),
@@ -135,6 +136,7 @@ namespace com.GraphDefined.SMSApi.API
                    TransmissionRetryDelay,
                    MaxNumberOfRetries ?? DefaultMaxNumberOfRetries,
                    false,
+                   DisableLogging,
                    null,
                    DNSClient)
 

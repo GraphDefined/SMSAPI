@@ -62,6 +62,7 @@ namespace com.GraphDefined.SMSApi.API
                                 TimeSpan?                             RequestTimeout               = null,
                                 TransmissionRetryDelayDelegate?       TransmissionRetryDelay       = null,
                                 UInt16?                               MaxNumberOfRetries           = DefaultMaxNumberOfRetries,
+                                Boolean?                              DisableLogging               = false,
                                 DNSClient?                            DNSClient                    = null)
 
             : base(RemoteURL,
@@ -76,6 +77,7 @@ namespace com.GraphDefined.SMSApi.API
                    RequestTimeout,
                    TransmissionRetryDelay,
                    MaxNumberOfRetries,
+                   DisableLogging,
                    DNSClient)
 
         { }
