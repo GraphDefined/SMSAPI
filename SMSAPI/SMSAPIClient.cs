@@ -284,7 +284,7 @@ namespace com.GraphDefined.SMSApi.API
                     result = new Tuple<Int32, String>(error.Code, error.Message);
 
             }
-            catch (Exception)
+            catch
             { }
 
             ResultStream.Position = 0;
