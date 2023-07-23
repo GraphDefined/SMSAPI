@@ -18,7 +18,6 @@
 
 #region Usings
 
-using System;
 using System.Net;
 using System.Net.Security;
 using System.Text;
@@ -66,7 +65,7 @@ namespace com.GraphDefined.SMSApi.API
         /// <summary>
         /// The default HTTP user agent.
         /// </summary>
-        public new const String  DefaultHTTPUserAgent  = "GraphDefined Asavie API Client v0.2";
+        public new const String  DefaultHTTPUserAgent  = "GraphDefined SMSAPI Client v0.3";
 
         #endregion
 
@@ -111,30 +110,32 @@ namespace com.GraphDefined.SMSApi.API
         public SMSAPIClient(URL?                                  RemoteURL                    = null,
                             HTTPHostname?                         VirtualHostname              = null,
                             String?                               Description                  = null,
+                            Boolean?                              PreferIPv4                   = null,
                             RemoteCertificateValidationCallback?  RemoteCertificateValidator   = null,
                             SslProtocols?                         TLSProtocol                  = null,
-                            Boolean?                              PreferIPv4                   = null,
                             String                                HTTPUserAgent                = DefaultHTTPUserAgent,
                             Credentials?                          BasicAuthentication          = null,
                             Credentials?                          Credentials                  = null,
                             TimeSpan?                             RequestTimeout               = null,
                             TransmissionRetryDelayDelegate?       TransmissionRetryDelay       = null,
-                            UInt16?                               MaxNumberOfRetries           = DefaultMaxNumberOfRetries,
+                            UInt16?                               MaxNumberOfRetries           = null,
+                            UInt32?                               InternalBufferSize           = null,
                             Boolean?                              DisableLogging               = false,
                             DNSClient?                            DNSClient                    = null)
 
-            : base(RemoteURL          ?? URL.Parse("https://api.smsapi.com/api/"),
+            : base(RemoteURL     ?? URL.Parse("https://api.smsapi.com/api/"),
                    VirtualHostname,
                    Description,
+                   PreferIPv4,
                    RemoteCertificateValidator,
                    null,
                    null,
                    TLSProtocol,
-                   PreferIPv4,
-                   HTTPUserAgent      ?? DefaultHTTPUserAgent,
+                   HTTPUserAgent ?? DefaultHTTPUserAgent,
                    RequestTimeout,
                    TransmissionRetryDelay,
-                   MaxNumberOfRetries ?? DefaultMaxNumberOfRetries,
+                   MaxNumberOfRetries,
+                   InternalBufferSize,
                    false,
                    DisableLogging,
                    null,
