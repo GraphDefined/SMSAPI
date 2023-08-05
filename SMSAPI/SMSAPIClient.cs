@@ -132,6 +132,7 @@ namespace com.GraphDefined.SMSApi.API
                    null,
                    TLSProtocol,
                    HTTPUserAgent ?? DefaultHTTPUserAgent,
+                   null,
                    RequestTimeout,
                    TransmissionRetryDelay,
                    MaxNumberOfRetries,
