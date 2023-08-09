@@ -127,7 +127,16 @@ namespace com.GraphDefined.SMSApi.API
                    VirtualHostname,
                    Description,
                    PreferIPv4,
-                   RemoteCertificateValidator,
+                   RemoteCertificateValidator is null
+                       ? null
+                       : (sender,
+                          certificate,
+                          chain,
+                          policyErrors) => (RemoteCertificateValidator(sender,
+                                                                       certificate,
+                                                                       chain,
+                                                                       policyErrors),
+                                            Array.Empty<String>()),
                    null,
                    null,
                    TLSProtocol,
