@@ -41,7 +41,7 @@ namespace com.GraphDefined.SMSApi.API
         /// <param name="RemoteURL">The remote URL of the OICP HTTP endpoint to connect to.</param>
         /// <param name="VirtualHostname">An optional HTTP virtual hostname.</param>
         /// <param name="Description">An optional description of this CPO client.</param>
-        /// <param name="RemoteCertificateValidator">The remote SSL/TLS certificate validator.</param>
+        /// <param name="RemoteCertificateValidator">The remote TLS certificate validator.</param>
         /// <param name="HTTPUserAgent">The HTTP user agent identification.</param>
         /// <param name="BasicAuthentication">An optional HTTP basic authentication.</param>
         /// <param name="Credentials">The default API authentication.</param>
