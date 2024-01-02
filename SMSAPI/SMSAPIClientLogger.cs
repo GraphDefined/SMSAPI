@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2017-2024 GraphDefined GmbH <achim.friedland@graphdefined.com>
+ * Copyright (c) 2017-2024 GraphDefined GmbH <achim.friedland@graphdefined.com> <achim.friedland@graphdefined.com>
  * This file is part of GraphDefined SMSAPI <https://github.com/GraphDefined/SMSAPI>
  *   based on original work of SMSAPI!
  *
