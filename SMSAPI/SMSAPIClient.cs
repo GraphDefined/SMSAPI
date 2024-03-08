@@ -402,7 +402,7 @@ namespace com.GraphDefined.SMSApi.API
 
             #region Send OnSendSMSAPIRequest event
 
-            var StartTime = DateTime.UtcNow;
+            var StartTime = org.GraphDefined.Vanaheimr.Illias.Timestamp.Now;
 
             try
             {
@@ -496,7 +496,7 @@ namespace com.GraphDefined.SMSApi.API
 
             #region Send OnSendSMSAPIResponse event
 
-            var Endtime = DateTime.UtcNow;
+            var Endtime = org.GraphDefined.Vanaheimr.Illias.Timestamp.Now;
 
             try
             {
