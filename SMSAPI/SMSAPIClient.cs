@@ -132,6 +132,7 @@ namespace com.GraphDefined.SMSApi.API
                        : (sender,
                           certificate,
                           chain,
+                          server,
                           policyErrors) => (RemoteCertificateValidator(sender,
                                                                        certificate,
                                                                        chain,
