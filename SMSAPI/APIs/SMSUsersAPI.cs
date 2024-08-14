@@ -24,6 +24,7 @@ using System.Security.Authentication;
 
 using org.GraphDefined.Vanaheimr.Hermod.DNS;
 using org.GraphDefined.Vanaheimr.Hermod.HTTP;
+using org.GraphDefined.Vanaheimr.Illias;
 
 #endregion
 
@@ -54,7 +55,7 @@ namespace com.GraphDefined.SMSApi.API
         /// <param name="DNSClient">The DNS client to use.</param>
         public SMSUsersAPI(URL?                                  RemoteURL                    = null,
                            HTTPHostname?                         VirtualHostname              = null,
-                           String?                               Description                  = null,
+                           I18NString?                           Description                  = null,
                            Boolean?                              PreferIPv4                   = null,
                            RemoteCertificateValidationCallback?  RemoteCertificateValidator   = null,
                            SslProtocols?                         TLSProtocol                  = null,
