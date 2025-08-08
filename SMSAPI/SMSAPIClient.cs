@@ -37,14 +37,14 @@ using com.GraphDefined.SMSApi.API.Response;
 namespace com.GraphDefined.SMSApi.API
 {
 
-    public delegate Task OnSendSMSAPIRequestDelegate (DateTime                        LogTimestamp,
+    public delegate Task OnSendSMSAPIRequestDelegate (DateTimeOffset                  LogTimestamp,
                                                       SMSAPIClient                    Sender,
                                                       EventTracking_Id                EventTrackingId,
                                                       String                          Command,
                                                       JObject                         Data,
                                                       TimeSpan?                       RequestTimeout);
 
-    public delegate Task OnSendSMSAPIResponseDelegate(DateTime                        LogTimestamp,
+    public delegate Task OnSendSMSAPIResponseDelegate(DateTimeOffset                  LogTimestamp,
                                                       SMSAPIClient                    Sender,
                                                       EventTracking_Id                EventTrackingId,
                                                       String                          Command,
@@ -406,7 +406,7 @@ namespace com.GraphDefined.SMSApi.API
 
             #region Send OnSendSMSAPIRequest event
 
-            var StartTime = org.GraphDefined.Vanaheimr.Illias.Timestamp.Now;
+            var startTime = Timestamp.Now;
 
             try
             {
@@ -414,7 +414,7 @@ namespace com.GraphDefined.SMSApi.API
                 if (OnSendSMSAPIRequest != null)
                     await Task.WhenAll(OnSendSMSAPIRequest.GetInvocationList().
                                         Cast<OnSendSMSAPIRequestDelegate>().
-                                        Select(e => e(StartTime,
+                                        Select(e => e(startTime,
                                                       this,
                                                       EventTrackingId,
                                                       Command,
@@ -500,7 +500,7 @@ namespace com.GraphDefined.SMSApi.API
 
             #region Send OnSendSMSAPIResponse event
 
-            var Endtime = org.GraphDefined.Vanaheimr.Illias.Timestamp.Now;
+            var endtime = Timestamp.Now;
 
             try
             {
@@ -508,14 +508,14 @@ namespace com.GraphDefined.SMSApi.API
                 if (OnSendSMSAPIResponse != null)
                     await Task.WhenAll(OnSendSMSAPIResponse.GetInvocationList().
                                        Cast<OnSendSMSAPIResponseDelegate>().
-                                       Select(e => e(Endtime,
+                                       Select(e => e(endtime,
                                                      this,
                                                      EventTrackingId,
                                                      Command,
                                                      JSONData,
                                                      RequestTimeout,
                                                      responseStatus,
-                                                     Endtime - StartTime))).
+                                                     endtime - startTime))).
                                        ConfigureAwait(false);
 
             }
