@@ -27,7 +27,7 @@ namespace com.GraphDefined.SMSApi.API.Response
         private DateTime? birthdayDate;
 
         [DataMember(Name = "birthday_date", IsRequired = false)]
-        private string BirthdayDateSerializationHelper { set { if (value != null) birthdayDate = DateTime.Parse(value); } get { return ""; } }
+        private string BirthdayDateSerializationHelper { set { if (value is not null) birthdayDate = DateTime.Parse(value); } get { return ""; } }
 
         public DateTime? BirthdayDate { get { return birthdayDate; } }
 
@@ -75,12 +75,12 @@ namespace com.GraphDefined.SMSApi.API.Response
         private uint DateAddSerializationHelper { set { DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); dateCreated = origin.AddSeconds(value); } get { return 0; } }
 
         [Obsolete("use DateCreated instead")]
-        public uint DateAdd { get { DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); return dateCreated != null ? (uint)(dateCreated.Value.ToUniversalTime() - origin).TotalSeconds : 0; } }
+        public uint DateAdd { get { DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); return dateCreated is not null ? (uint)(dateCreated.Value.ToUniversalTime() - origin).TotalSeconds : 0; } }
 
         [DataMember(Name = "date_mod", IsRequired = false)]
         private uint DateModSerializationHelper { set { DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); dateUpdated = origin.AddSeconds(value); } get { return 0; } }
 
         [Obsolete("use DateUpdated instead")]
-        public uint DateMod { get { DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); return dateUpdated != null ? (uint)(dateUpdated.Value.ToUniversalTime() - origin).TotalSeconds : 0; } }
+        public uint DateMod { get { DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); return dateUpdated is not null ? (uint)(dateUpdated.Value.ToUniversalTime() - origin).TotalSeconds : 0; } }
     }
 }

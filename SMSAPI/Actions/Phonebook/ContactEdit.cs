@@ -36,14 +36,14 @@ namespace com.GraphDefined.SMSApi.API.Action
 
             collection.Add("edit_contact", oldNumber);
 
-            if (newNumber != null)  collection.Add("new_number", newNumber);
-            if (firstName != null)  collection.Add("first_name", firstName);
-            if (lastName != null)   collection.Add("last_name", lastName);
-            if (info != null)       collection.Add("info", info);
+            if (newNumber is not null)  collection.Add("new_number", newNumber);
+            if (firstName is not null)  collection.Add("first_name", firstName);
+            if (lastName is not null)   collection.Add("last_name", lastName);
+            if (info is not null)       collection.Add("info", info);
             if (birthday != 0)      collection.Add("birthday", birthday.ToString());
-            if (city != null)       collection.Add("city", city);
-            if (gender != null)     collection.Add("gender", gender);
-            if (groups != null)     collection.Add("groups", string.Join(",", groups));
+            if (city is not null)       collection.Add("city", city);
+            if (gender is not null)     collection.Add("gender", gender);
+            if (groups is not null)     collection.Add("groups", string.Join(",", groups));
 
             return collection;
         }

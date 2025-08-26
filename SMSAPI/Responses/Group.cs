@@ -47,7 +47,7 @@ namespace com.GraphDefined.SMSApi.API.Response
         {
             get
             {
-                if (permissions == null)
+                if (permissions is null)
                     permissions = new List<GroupPermission>();
                 return permissions;
             }

@@ -23,7 +23,7 @@ namespace com.GraphDefined.SMSApi.API.Response
         {
             get
             {
-                if (collection == null)
+                if (collection is null)
                     collection = new System.Collections.Generic.List<T>();
                 return collection;
             }

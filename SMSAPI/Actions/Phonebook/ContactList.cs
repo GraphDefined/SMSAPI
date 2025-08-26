@@ -38,12 +38,12 @@ namespace com.GraphDefined.SMSApi.API.Action
 
             collection.Add("list_contacts", "");
 
-            if (number != null && number.Length > 0) collection.Add("number", number);
-            if (groups != null && groups.Length > 0) collection.Add("groups", string.Join(";", groups));
-            if (searchText != null && searchText.Length > 0) collection.Add("text_search", searchText);
-            if (gender != null && gender.Length > 0) collection.Add("gender", gender);
-            if (orderBy != null && orderBy.Length > 0) collection.Add("order_by", orderBy);
-            if (orderDir != null && orderDir.Length > 0) collection.Add("order_dir", orderDir);
+            if (number is not null && number.Length > 0) collection.Add("number", number);
+            if (groups is not null && groups.Length > 0) collection.Add("groups", string.Join(";", groups));
+            if (searchText is not null && searchText.Length > 0) collection.Add("text_search", searchText);
+            if (gender is not null && gender.Length > 0) collection.Add("gender", gender);
+            if (orderBy is not null && orderBy.Length > 0) collection.Add("order_by", orderBy);
+            if (orderDir is not null && orderDir.Length > 0) collection.Add("order_dir", orderDir);
             if (limit > 0) collection.Add("limit", limit.ToString());
             if (offset > 0) collection.Add("offset", offset.ToString());
 

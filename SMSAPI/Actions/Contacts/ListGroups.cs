@@ -23,8 +23,8 @@ namespace com.GraphDefined.SMSApi.API.Action
             get
             {
                 var parameters = base.Parameters;
-                if (Id   != null) parameters.Add("id",   Id);
-                if (Name != null) parameters.Add("name", Name);
+                if (Id   is not null) parameters.Add("id",   Id);
+                if (Name is not null) parameters.Add("name", Name);
                 return parameters;
             }
         }

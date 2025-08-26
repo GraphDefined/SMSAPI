@@ -23,10 +23,10 @@ namespace com.GraphDefined.SMSApi.API.Action
             get
             {
                 var parameters = base.Parameters;
-                if (Username != null) parameters.Add("username", Username);
-                if (Read     != null) parameters.Add("read",     Convert.ToInt32(Read.Value).ToString());
-                if (Write    != null) parameters.Add("write",    Convert.ToInt32(Write.Value).ToString());
-                if (Send     != null) parameters.Add("send",     Convert.ToInt32(Send.Value).ToString());
+                if (Username is not null) parameters.Add("username", Username);
+                if (Read     is not null) parameters.Add("read",     Convert.ToInt32(Read.Value).ToString());
+                if (Write    is not null) parameters.Add("write",    Convert.ToInt32(Write.Value).ToString());
+                if (Send     is not null) parameters.Add("send",     Convert.ToInt32(Send.Value).ToString());
                 return parameters;
             }
         }

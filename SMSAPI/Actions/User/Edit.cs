@@ -70,14 +70,14 @@ namespace com.GraphDefined.SMSApi.API.Action
                                  { "set_user",  Username }
                              };
 
-            if (Password    != null) collection.Add("pass",            Password);
-            if (PasswordApi != null) collection.Add("pass_api",        PasswordApi);
+            if (Password    is not null) collection.Add("pass",            Password);
+            if (PasswordApi is not null) collection.Add("pass_api",        PasswordApi);
             if (Limit       >= 0)    collection.Add("limit",           Limit.     ToString());
             if (MonthLimit  >= 0)    collection.Add("month_limit",     MonthLimit.ToString());
             if (Senders     >= 0)    collection.Add("senders",         Senders.   ToString());
             if (Phonebook   >= 0)    collection.Add("phonebook",       Phonebook. ToString());
             if (Active      >= 0)    collection.Add("active",          Active > 0 ? "1" : "0");
-            if (Info        != null) collection.Add("info",            Info);
+            if (Info        is not null) collection.Add("info",            Info);
             if (WithoutPrefix)       collection.Add("without_prefix",  "1");
 
             return collection;

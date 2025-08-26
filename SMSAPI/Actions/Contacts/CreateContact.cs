@@ -22,15 +22,15 @@ namespace com.GraphDefined.SMSApi.API.Action
             get
             {
                 var parameters = base.Parameters;
-                if (PhoneNumber  != null) parameters.Add("phone_number",  PhoneNumber);
-                if (Email        != null) parameters.Add("email",         Email);
-                if (FirstName    != null) parameters.Add("first_name",    FirstName);
-                if (LastName     != null) parameters.Add("last_name",     LastName);
-                if (Gender       != null) parameters.Add("gender",        Gender);
-                if (BirthdayDate != null) parameters.Add("birthday_date", BirthdayDate.Value.ToString("Y-m-d"));
-                if (Description  != null) parameters.Add("description",   Description);
-                if (City         != null) parameters.Add("city",          City);
-                if (Source       != null) parameters.Add("source",        Source);
+                if (PhoneNumber  is not null) parameters.Add("phone_number",  PhoneNumber);
+                if (Email        is not null) parameters.Add("email",         Email);
+                if (FirstName    is not null) parameters.Add("first_name",    FirstName);
+                if (LastName     is not null) parameters.Add("last_name",     LastName);
+                if (Gender       is not null) parameters.Add("gender",        Gender);
+                if (BirthdayDate is not null) parameters.Add("birthday_date", BirthdayDate.Value.ToString("Y-m-d"));
+                if (Description  is not null) parameters.Add("description",   Description);
+                if (City         is not null) parameters.Add("city",          City);
+                if (Source       is not null) parameters.Add("source",        Source);
                 return parameters;
             }
         }

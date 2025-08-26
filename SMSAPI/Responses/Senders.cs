@@ -15,7 +15,7 @@ namespace com.GraphDefined.SMSApi.API.Response
         {
             get
             {
-                if (list == null)
+                if (list is null)
                     list = new List<Sender>();
 
                 return list;

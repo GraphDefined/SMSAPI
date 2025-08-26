@@ -221,7 +221,7 @@ namespace com.GraphDefined.SMSApi.API
                            "Content-Disposition: form-data; name=\"{0}\"; filename=\"{0}\"" + Environment.NewLine +
                            "Content-Type: application/octet-stream" + Environment.NewLine + Environment.NewLine;
 
-            if (Files != null)
+            if (Files is not null)
             {
                 foreach (var file in Files)
                 {
@@ -411,7 +411,7 @@ namespace com.GraphDefined.SMSApi.API
             try
             {
 
-                if (OnSendSMSAPIRequest != null)
+                if (OnSendSMSAPIRequest is not null)
                     await Task.WhenAll(OnSendSMSAPIRequest.GetInvocationList().
                                         Cast<OnSendSMSAPIRequestDelegate>().
                                         Select(e => e(startTime,
@@ -439,7 +439,7 @@ namespace com.GraphDefined.SMSApi.API
                 var webRequest = WebRequest.Create(RemoteURL.ToString() + Command);
                 webRequest.Method = HTTPMethod.RequestMethodToString();
 
-                if (BasicAuthentication != null)
+                if (BasicAuthentication is not null)
                     webRequest.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(BasicAuthentication.Username + ":" + BasicAuthentication.Password)));
 
                 #region POST | PUT
@@ -449,7 +449,7 @@ namespace com.GraphDefined.SMSApi.API
 
                     Stream stream;
 
-                    if (Files != null && Files.Count > 0)
+                    if (Files is not null && Files.Count > 0)
                     {
                         webRequest.ContentType = "multipart/form-data; boundary=" + boundary;
                         stream = PrepareMultipartContent(boundary, Data, Files);
@@ -505,7 +505,7 @@ namespace com.GraphDefined.SMSApi.API
             try
             {
 
-                if (OnSendSMSAPIResponse != null)
+                if (OnSendSMSAPIResponse is not null)
                     await Task.WhenAll(OnSendSMSAPIResponse.GetInvocationList().
                                        Cast<OnSendSMSAPIResponseDelegate>().
                                        Select(e => e(endtime,

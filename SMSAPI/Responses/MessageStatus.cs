@@ -53,9 +53,9 @@ namespace com.GraphDefined.SMSApi.API.Response
 
         public Boolean IsError
 
-            => ID        == null ||
+            => ID        is null ||
                ID.Length == 0    ||
-               Error     != null;
+               Error     is not null;
 
         #endregion
 

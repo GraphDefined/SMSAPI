@@ -22,8 +22,8 @@ namespace com.GraphDefined.SMSApi.API.Action
             get
             {
                 NameValueCollection parameters = base.Parameters;
-                if (Name != null) parameters.Add("name", Name);
-                if (Type != null) parameters.Add("type", Type);
+                if (Name is not null) parameters.Add("name", Name);
+                if (Type is not null) parameters.Add("type", Type);
                 return parameters;
             }
         }

@@ -28,7 +28,7 @@ namespace com.GraphDefined.SMSApi.API.Action
             collection.Add("password", Credentials.Password);
 
             collection.Add("add_group", name);
-            if (info != null) collection.Add("info", info);
+            if (info is not null) collection.Add("info", info);
 
             return collection;
         }

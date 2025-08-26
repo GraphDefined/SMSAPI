@@ -50,13 +50,13 @@ namespace com.GraphDefined.SMSApi.API.Action
                                  { "password", Credentials.Password }
                              };
 
-            if (Sender != null)
+            if (Sender is not null)
                 collection.Add("from", Sender);
 
-            if (To != null)
+            if (To is not null)
                 collection.Add("to", String.Join(",", To));
 
-            if (Group != null)
+            if (Group is not null)
                 collection.Add("group", Group);
 
             collection.Add("message", Text);
@@ -66,19 +66,19 @@ namespace com.GraphDefined.SMSApi.API.Action
             collection.Add("flash",     Flash     ? "1" : "0");
             collection.Add("fast",      Fast      ? "1" : "0");
 
-            if (DataCoding != null)
+            if (DataCoding is not null)
                 collection.Add("datacoding", DataCoding);
 
             if (MaxParts > 0)
                 collection.Add("max_parts", MaxParts.ToString());
 
-            if (DateSent != null)
+            if (DateSent is not null)
                 collection.Add("date", DateSent);
 
-            if (DateExpire != null)
+            if (DateExpire is not null)
                 collection.Add("expiration_date", DateExpire);
 
-            if (Partner != null)
+            if (Partner is not null)
                 collection.Add("partner_id", Partner);
 
             collection.Add("encoding", Encoding);
@@ -89,7 +89,7 @@ namespace com.GraphDefined.SMSApi.API.Action
             if (Test == true)
                 collection.Add("test", "1");
 
-            if (Idx != null && Idx.Any())
+            if (Idx is not null && Idx.Any())
             {
                 collection.Add("check_idx", (IdxCheck ? "1" : "0"));
                 collection.Add("idx", string.Join("|", Idx));
@@ -98,11 +98,11 @@ namespace com.GraphDefined.SMSApi.API.Action
             if (Details == true)
                 collection.Add("details", "1");
 
-            if (Params != null)
+            if (Params is not null)
             {
                 for (int i = 0; i < Params.Length; i++)
                 {
-                    if (Params[i] != null)
+                    if (Params[i] is not null)
                     {
                         collection.Add("param" + (i + 1).ToString(), Params[i]);
                     }
@@ -116,10 +116,10 @@ namespace com.GraphDefined.SMSApi.API.Action
         protected override void Validate()
         {
 
-            if( To != null && Group != null )
+            if( To is not null && Group is not null )
                 throw new ArgumentException("Cannot use 'to' and 'group' at the same time!");
 
-            if (Text == null)
+            if (Text is null)
                 throw new ArgumentException("Cannot send message without text!");
 
         }
@@ -266,7 +266,7 @@ namespace com.GraphDefined.SMSApi.API.Action
                 throw new IndexOutOfRangeException();
             }
 
-            if (this.Params == null)
+            if (this.Params is null)
             {
                 this.Params = new string[4];
             }

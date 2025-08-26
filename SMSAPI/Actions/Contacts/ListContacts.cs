@@ -22,16 +22,16 @@ namespace com.GraphDefined.SMSApi.API.Action
             get
             {
                 NameValueCollection parameters = base.Parameters;
-                if (Search       != null) parameters.Add("q",             Search);
-                if (Offset       != null) parameters.Add("offset",        Offset.Value.ToString());
-                if (Limit        != null) parameters.Add("limit",         Limit.Value.ToString());
-                if (PhoneNumber  != null) parameters.Add("phone_number",  PhoneNumber);
-                if (Email        != null) parameters.Add("email",         Email);
-                if (FirstName    != null) parameters.Add("first_name",    FirstName);
-                if (LastName     != null) parameters.Add("last_name",     LastName);
-                if (GroupId      != null) parameters.Add("group_id",      GroupId.Value.ToString());
-                if (Gender       != null) parameters.Add("gender",        Gender);
-                if (BirthdayDate != null) parameters.Add("birthday_date", BirthdayDate.Value.ToString("Y-m-d"));
+                if (Search       is not null) parameters.Add("q",             Search);
+                if (Offset       is not null) parameters.Add("offset",        Offset.Value.ToString());
+                if (Limit        is not null) parameters.Add("limit",         Limit.Value.ToString());
+                if (PhoneNumber  is not null) parameters.Add("phone_number",  PhoneNumber);
+                if (Email        is not null) parameters.Add("email",         Email);
+                if (FirstName    is not null) parameters.Add("first_name",    FirstName);
+                if (LastName     is not null) parameters.Add("last_name",     LastName);
+                if (GroupId      is not null) parameters.Add("group_id",      GroupId.Value.ToString());
+                if (Gender       is not null) parameters.Add("gender",        Gender);
+                if (BirthdayDate is not null) parameters.Add("birthday_date", BirthdayDate.Value.ToString("Y-m-d"));
                 return parameters;
             }
         }
