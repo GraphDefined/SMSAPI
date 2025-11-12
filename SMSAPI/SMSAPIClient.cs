@@ -144,6 +144,7 @@ namespace com.GraphDefined.SMSApi.API
                    null,
                    null,
                    null,
+                   null,
                    HTTPUserAgent ?? DefaultHTTPUserAgent,
                    ConnectionType.Close,
                    RequestTimeout,
