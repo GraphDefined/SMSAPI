@@ -140,6 +140,8 @@ namespace com.GraphDefined.SMSApi.API
                                             Array.Empty<String>()),
                    null,
                    null,
+                   null,
+                   null,
                    TLSProtocol,
                    null,
                    null,
