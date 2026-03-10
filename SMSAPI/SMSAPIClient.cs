@@ -503,7 +503,7 @@ namespace com.GraphDefined.SMSApi.API
 
             #region Send OnSendSMSAPIResponse event
 
-            var endtime = Timestamp.Now;
+            var endTime = Timestamp.Now;
 
             try
             {
@@ -511,14 +511,14 @@ namespace com.GraphDefined.SMSApi.API
                 if (OnSendSMSAPIResponse is not null)
                     await Task.WhenAll(OnSendSMSAPIResponse.GetInvocationList().
                                        Cast<OnSendSMSAPIResponseDelegate>().
-                                       Select(e => e(endtime,
+                                       Select(e => e(endTime,
                                                      this,
                                                      EventTrackingId,
                                                      Command,
                                                      JSONData,
                                                      RequestTimeout,
                                                      responseStatus,
-                                                     endtime - startTime))).
+                                                     endTime - startTime))).
                                        ConfigureAwait(false);
 
             }
